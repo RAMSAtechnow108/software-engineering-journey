@@ -1,0 +1,336 @@
+Requirement 1
+
+Student add hona chahiye.
+
+Required information
+
+Student ID
+Name
+Age
+Email
+Phone
+Course
+
+
+
+
+
+Requirement 2
+
+Student search hona chahiye.
+
+Search by
+
+Student ID
+Email
+Phone
+
+
+
+
+
+Requirement 3
+
+Student update hona chahiye.
+
+Example
+
+Phone Change
+
+Email Change
+
+Course Change
+
+
+
+
+
+
+
+Requirement 4
+
+Student delete hona chahiye.
+
+Requirement 5
+
+Sab students dekhne hain.
+
+Requirement 6
+
+Exit
+
+
+
+
+
+
+
+
+
+
+Ab Backend Engineer sochna start karta hai.
+
+Question 1.
+
+Student kya hai?
+
+Student ek...
+
+Class?
+Dictionary?
+Tuple?
+List?
+Answer
+
+Student ek Object hai.
+
+Isliye
+
+Student Class
+
+banegi.
+
+
+
+
+
+
+
+
+
+
+
+
+Question 2
+
+Student ko permanently kaha store karenge?
+
+List?
+
+↓
+
+No
+
+↓
+
+MySQL
+
+
+
+
+
+
+
+
+
+
+
+Question 3
+
+Student ko Database me kaun save karega?
+
+Student Class?
+
+↓
+
+No
+
+Student ka kaam sirf student represent karna hai.
+
+Saving ka kaam Repository karegi.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question 4
+
+Age valid hai ya nahi?
+
+Repository check karegi?
+
+No
+
+Database?
+
+No
+
+Service karegi.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Question 5
+
+User input kaun lega?
+
+Student?
+
+Repository?
+
+No
+
+Controller.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Isliye Architecture ban gaya.
+User
+
+↓
+
+Controller
+
+↓
+
+Service
+
+↓
+
+Repository
+
+↓
+
+Database
+
+Ab ek baar reverse
+
+Database
+
+↓
+
+Repository
+
+↓
+
+Service
+
+↓
+
+Controller
+
+↓
+
+User
+
+
+
+
+
+
+
+
+
+
+
+
+
+Pehle hum MySQL Database Design karenge.
+
+Kyunki backend me Database pehle design hota hai, uske baad Python classes banti hain.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Main chahta hoon ki hum har class banane se pehle uska Class Design Document banayen:
+
+Class Name
+Purpose
+Responsibilities
+Attributes
+Methods
+Why this class exists
+Which OOP concepts are used
+
+
+
+
+
+
+
+
+
+
+Abhi sirf flow dekho. database 
+
+Student Object
+
+↓
+
+Repository
+
+↓
+
+Query
+
+↓
+
+Values
+
+↓
+
+Cursor
+
+↓
+
+Execute
+
+↓
+
+Commit
+
+↓
+
+Database
+
+
+
+
+
+Agar interviewer pooche:
+
+"Placeholder mapping kaise hoti hai?"
+
+Tum confidently bolna:
+
+"mysql-connector-python placeholders ko left-to-right tuple values ke saath map karta hai. Isliye values ka order SQL query ke column order se match hona chahiye."
