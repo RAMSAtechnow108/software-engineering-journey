@@ -15,3 +15,9 @@ class StudentService:
             return 
     
         self.__repository.add_student(student=student)
+        
+    def get_all_students(self):
+
+        student = self.__repository.get_all_students()
+        
+        return student

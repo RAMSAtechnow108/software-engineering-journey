@@ -18,3 +18,15 @@ class StudentController:
         student = Student(None,name,age, email,phone,course)
 
         self.__service.add_student(student=student)
+
+    
+    def show_students(self):
+        
+        students =  self.__service.get_all_students()
+
+        if not students :
+            print("\nNo students found")
+            return
+        
+        for student in students:
+            print(student)
