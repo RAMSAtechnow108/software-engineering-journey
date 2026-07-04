@@ -30,3 +30,17 @@ class StudentController:
         
         for student in students:
             print(student)
+        
+    
+    def search_student(self):
+        
+        student_id = input("Enter Student ID: ")
+
+        if not student_id.isdigit():
+            print("Please enter valid id ")
+            return 
+        
+        student = self.__service.get_student_by_id(student_id)
+        
+        print(student)
+

@@ -19,5 +19,12 @@ class StudentService:
     def get_all_students(self):
 
         student = self.__repository.get_all_students()
+
+        return student
+    
+    
+    def get_student_by_id(self,student_id):
+        
+        student = self.__repository.get_student_by_id(student_id=student_id)
         
         return student

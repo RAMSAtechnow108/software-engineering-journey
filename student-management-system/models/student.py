@@ -12,7 +12,7 @@ class Student:
     
     def __str__(self):
         return (
-            f"Student1("
+            f"Student("
             f"id={self.student_id},"
             f"name='{self.name}',"
             f"age={self.age},"

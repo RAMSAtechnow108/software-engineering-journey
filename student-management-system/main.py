@@ -47,6 +47,10 @@ while True:
     
     elif choice == 2:
         controller.show_students()
+    
+    elif choice == 3:
+        controller.search_student()
+        
     if choice == 6:
         print("Exiting.....")
         break

@@ -70,8 +70,50 @@ class StudentRepository:
             )
 
             students.append(student)
-            
+
         cursor.close()
         
         return students
+        
+        
+    def get_student_by_id(self,student_id):
+        
+        cursor = self.__connection.cursor()
+
+        query = """
+        SELECT 
+            student_id,
+            name,
+            age,
+            email,
+            phone,
+            course
+        FROM students
+        WHERE student_id=%s
+        """
+        
+        cursor.execute(query,(student_id,))
+
+        row = cursor.fetchone()
+        
+        if row is None:
+            cursor.close()
+            
+            return None
+        
+        
+        
+        student = Student(
+                        row[0],
+                        row[1],
+                        row[2],
+                        row[3],
+                        row[4],
+                        row[5]
+                        )
+        
+        
+        cursor.close()
+        
+        return student
         
