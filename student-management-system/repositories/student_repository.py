@@ -13,7 +13,7 @@ class StudentRepository:
         cursor = self.__connection.cursor()
 
         query = """
-        INSERT INTO TABLE students
+        INSERT INTO students
         (name,age,email,phone,course)
         VALUES  
         (%s,%s,%s,%s,%s)
