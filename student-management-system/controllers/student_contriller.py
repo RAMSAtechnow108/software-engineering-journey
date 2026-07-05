@@ -42,5 +42,47 @@ class StudentController:
         
         student = self.__service.get_student_by_id(student_id)
         
+        student.course="java"
         print(student)
 
+
+    def update_student(self):
+        student_id = input("Enter Student ID: ")
+        if not student_id.isdigit():
+            print("Invalid input")
+            return 
+        
+        student = self.__service.get_student_by_id(student_id=student_id)
+        
+        if student is None:
+            print("Student not found")
+            return 
+        
+        print(student)
+        
+
+        new_name = input(f"Current Name: {student.name}\nEnter New Name (Press Enter to keep current): ")
+        if new_name:
+            student.name = new_name
+
+        new_age = input(f"Current Age: {student.age}\nEnter New Age (Press Enter to keep current): ")
+        if new_age:
+            if not new_age.isdigit():
+                print("Invalid age")
+                return
+            student.age = int(new_age)
+
+        new_email = input(f"Current Email: {student.email}\nEnter New Email (Press Enter to keep current): ")
+        if new_email:
+            student.email = new_email
+
+        new_phone = input(f"Current Phone: {student.phone}\nEnter New Phone (Press Enter to keep current): ")
+        if new_phone:
+            student.phone = new_phone
+
+        new_course = input(f"Current Course: {student.course}\nEnter New Course (Press Enter to keep current): ")
+        if new_course:
+            student.course = new_course
+
+        self.__service.update_student(student)
+        

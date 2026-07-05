@@ -116,4 +116,37 @@ class StudentRepository:
         cursor.close()
         
         return student
+    
+    
+    def update_student_info(self,student):
+        
+        cursor = self.__connection.cursor()
+
+        query = """
+        UPDATE students
+        set 
+            name = %s,
+            age = %s,
+            email = %s,
+            phone = %s,
+            course = %s
+        where student_id = %s
+        """
+        
+        values = (
+            student.name,
+            student.age,
+            student.email,
+            student.phone,
+            student.course,
+            student.student_id
+        )
+        
+        cursor.execute(query,values)
+
+        self.__connection.commit()
+
+        cursor.close()
+
+
         
