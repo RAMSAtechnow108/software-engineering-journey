@@ -58,6 +58,6 @@ while True:
         controller.delete_student()
     if choice == 6:
         print("Exiting.....")
-        break
+        brea
         
     
