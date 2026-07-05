@@ -53,6 +53,9 @@ while True:
     
     elif choice == 4:
         controller.update_student()
+        
+    elif choice == 5:
+        controller.delete_student()
     if choice == 6:
         print("Exiting.....")
         break

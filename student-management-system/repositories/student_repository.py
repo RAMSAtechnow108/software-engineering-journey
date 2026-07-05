@@ -150,3 +150,20 @@ class StudentRepository:
 
 
         
+        
+    def delete_student(self,student_id):
+        
+        cursor = self.__connection.cursor()
+
+        query = """
+        DELETE from students
+        WHERE student_id=%s
+        """
+        
+        
+        cursor.execute(query,(student_id,))
+
+        self.__connection.commit()
+
+        cursor.close()
+

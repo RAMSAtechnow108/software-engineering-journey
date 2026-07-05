@@ -16,7 +16,7 @@ class Student:
             f"id={self.student_id},"
             f"name='{self.name}',"
             f"age={self.age},"
-            f"email={self.email}',"
+            f"email='{self.email}',"
             f"phone={self.phone},"
             f"course='{self.course}',)"
         )

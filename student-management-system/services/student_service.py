@@ -36,3 +36,9 @@ class StudentService:
             return 
         
         self.__repository.update_student_info(student=student)
+        
+        
+    def delete_student(self,student_id):
+        
+        self.__repository.delete_student(student_id=student_id)
+        

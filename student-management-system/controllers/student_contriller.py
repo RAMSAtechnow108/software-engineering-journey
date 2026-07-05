@@ -86,3 +86,38 @@ class StudentController:
 
         self.__service.update_student(student)
         
+        
+    
+    
+    def delete_student(self):
+        
+        student_id = input("Enter student ID: ")
+        
+        if not student_id.isdigit():
+            print("Invalid student ID")
+            return 
+        
+        student_id = int(student_id)
+
+        student = self.__service.get_student_by_id(student_id=student_id)
+
+        if student is None:
+            print("Student Not Found !")
+            return
+        
+        print(student)
+        
+        choice = input("Are you sure? (Y/N): ").lower()
+
+        if choice == "y":
+            self.__service.delete_student(student_id)
+
+            print("Student Deleted Successfully.")
+
+        else:
+            
+            print("Delete Cancelled")
+
+        
+
+        
