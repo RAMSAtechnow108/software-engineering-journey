@@ -1,5 +1,7 @@
 from mysql.connector import Error
 from models.student import Student
+from exceptions.student_exceptions import StudentNotFoundError
+
 
 
 class StudentRepository:
@@ -99,7 +101,7 @@ class StudentRepository:
         if row is None:
             cursor.close()
             
-            return None
+            raise StudentNotFoundError(student_id)
         
         
         

@@ -20,6 +20,3 @@ class Student:
             f"phone={self.phone},"
             f"course='{self.course}',)"
         )
-# student1 = Student(None,"Rahul", 15,"Rahul@gmail.com","1234554321","Python")
-# print(student1.name,student1.course)
-# print(student1)   #--> student1.__str__()

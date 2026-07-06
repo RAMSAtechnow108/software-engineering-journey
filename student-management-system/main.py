@@ -2,8 +2,8 @@ from database.connection import DatabaseConnection
 from models.student import Student
 from repositories.student_repository import StudentRepository
 from services.student_service import StudentService
-from controllers.student_contriller import   StudentController
-
+from controllers.student_controller import   StudentController
+from exceptions.student_exceptions import StudentNotFoundError
 
 
 
@@ -58,6 +58,6 @@ while True:
         controller.delete_student()
     if choice == 6:
         print("Exiting.....")
-        brea
+        break
         
     

@@ -1,5 +1,6 @@
 from services.student_service import StudentService
 from models.student import Student
+from exceptions.student_exceptions import StudentNotFoundError
 
 
 class StudentController:
@@ -39,10 +40,15 @@ class StudentController:
         if not student_id.isdigit():
             print("Please enter valid id ")
             return 
+        try:
+            
+            student = self.__service.get_student_by_id(student_id)
         
-        student = self.__service.get_student_by_id(student_id)
+        except StudentNotFoundError as error:
+            print(error)
+            return
         
-        student.course="java"
+        
         print(student)
 
 
@@ -52,15 +58,19 @@ class StudentController:
             print("Invalid input")
             return 
         
-        student = self.__service.get_student_by_id(student_id=student_id)
-        
-        if student is None:
-            print("Student not found")
-            return 
-        
+        try : 
+            
+            student = self.__service.get_student_by_id(student_id=student_id)
+            
+            
+            
+        except StudentNotFoundError as e:
+            print(e)
+            return      
+            
         print(student)
         
-
+        
         new_name = input(f"Current Name: {student.name}\nEnter New Name (Press Enter to keep current): ")
         if new_name:
             student.name = new_name
