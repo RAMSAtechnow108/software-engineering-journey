@@ -14,27 +14,30 @@ class StudentRepository:
         
         cursor = self.__connection.cursor()
 
-        query = """
-        INSERT INTO students
-        (name,age,email,phone,course)
-        VALUES  
-        (%s,%s,%s,%s,%s)
-        """
+        try:
+            query = """
+            INSERT INTO students
+            (name,age,email,phone,course)
+            VALUES  
+            (%s,%s,%s,%s,%s)
+            """
 
-        values = (
-            student.name,
-            student.age,
-            student.email,
-            student.phone,
-            student.course
-        )
-        
+            values = (
+                student.name,
+                student.age,
+                student.email,
+                student.phone,
+                student.course
+            )
+            
 
-        cursor.execute(query,values)
-        
-        self.__connection.commit()
-        cursor.close()
-        print("Student Added Successfully.")
+            cursor.execute(query,values)
+            
+            self.__connection.commit()
+            
+            print("Student Added Successfully.")
+        finally:
+            cursor.close()
 
     
     
@@ -42,113 +45,122 @@ class StudentRepository:
     def get_all_students(self):
         cursor = self.__connection.cursor()
 
-
-        query = """
-        SELECT 
-            student_id,
-            name, 
-            age,
-            email,
-            phone,
-            course
-        from students
         
-        """
+        try:
+            
+            query = """
+            SELECT 
+                student_id,
+                name, 
+                age,
+                email,
+                phone,
+                course
+            from students
+            
+            """
+            
+            cursor.execute(query)
+
+            rows = cursor.fetchall()
+
+            students = []
+
+            for row in rows:
+                student = Student(
+                    row[0],
+                    row[1],
+                    row[2],
+                    row[3],
+                    row[4],
+                    row[5]
+                )
+
+                students.append(student)
+
+            return students
         
-        cursor.execute(query)
+        finally: 
 
-        rows = cursor.fetchall()
-
-        students = []
-
-        for row in rows:
-            student = Student(
-                row[0],
-                row[1],
-                row[2],
-                row[3],
-                row[4],
-                row[5]
-            )
-
-            students.append(student)
-
-        cursor.close()
-        
-        return students
-        
+            cursor.close()
+            
+            
         
     def get_student_by_id(self,student_id):
         
         cursor = self.__connection.cursor()
 
-        query = """
-        SELECT 
-            student_id,
-            name,
-            age,
-            email,
-            phone,
-            course
-        FROM students
-        WHERE student_id=%s
-        """
-        
-        cursor.execute(query,(student_id,))
-
-        row = cursor.fetchone()
-        
-        if row is None:
-            cursor.close()
+        try:
+            query = """
+            SELECT 
+                student_id,
+                name,
+                age,
+                email,
+                phone,
+                course
+            FROM students
+            WHERE student_id=%s
+            """
             
-            raise StudentNotFoundError(student_id)
+            cursor.execute(query,(student_id,))
+
+            row = cursor.fetchone()
+            
+            if row is None:
+                cursor.close()
+                
+                raise StudentNotFoundError(student_id)
+            
+            
+            
+            student = Student(
+                            row[0],
+                            row[1],
+                            row[2],
+                            row[3],
+                            row[4],
+                            row[5]
+                            )
+            
+            
+            return student
         
+        finally:
+            
+            cursor.close()
         
-        
-        student = Student(
-                        row[0],
-                        row[1],
-                        row[2],
-                        row[3],
-                        row[4],
-                        row[5]
-                        )
-        
-        
-        cursor.close()
-        
-        return student
-    
-    
     def update_student_info(self,student):
         
         cursor = self.__connection.cursor()
 
-        query = """
-        UPDATE students
-        set 
-            name = %s,
-            age = %s,
-            email = %s,
-            phone = %s,
-            course = %s
-        where student_id = %s
-        """
         
-        values = (
-            student.name,
-            student.age,
-            student.email,
-            student.phone,
-            student.course,
-            student.student_id
-        )
-        
-        cursor.execute(query,values)
+        try:
+            query = """
+            UPDATE students
+            set 
+                name = %s,
+                age = %s,
+                email = %s,
+                phone = %s,
+                course = %s
+            where student_id = %s
+            """
+            
+            values = (
+                student.name,
+                student.age,
+                student.email,
+                student.phone,
+                student.course,
+                student.student_id
+            )
+            
+            cursor.execute(query,values)
 
-        self.__connection.commit()
-
-        cursor.close()
+            self.__connection.commit()
+        finally:
+            cursor.close()
 
 
         
@@ -156,16 +168,17 @@ class StudentRepository:
     def delete_student(self,student_id):
         
         cursor = self.__connection.cursor()
+        try:
+            query = """
+            DELETE from students
+            WHERE student_id=%s
+            """
+            
+            
+            cursor.execute(query,(student_id,))
 
-        query = """
-        DELETE from students
-        WHERE student_id=%s
-        """
-        
-        
-        cursor.execute(query,(student_id,))
+            self.__connection.commit()
 
-        self.__connection.commit()
-
-        cursor.close()
+        finally:
+            cursor.close()
 
