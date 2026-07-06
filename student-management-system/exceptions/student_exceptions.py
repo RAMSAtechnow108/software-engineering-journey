@@ -5,5 +5,3 @@ class StudentNotFoundError(Exception):
         
         super().__init__(f"Student with ID {student_id} not found.")
         
-        
-class 

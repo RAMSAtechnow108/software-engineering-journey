@@ -1,5 +1,9 @@
 from models.student import Student
 from exceptions.student_exceptions import StudentNotFoundError
+from utils.logger import logger
+
+
+
 
 
 
@@ -33,6 +37,8 @@ class StudentRepository:
             cursor.execute(query,values)
             
             self.__connection.commit()
+            
+            logger.info(f"Student Added | ID={cursor.lastrowid} | Name={student.name}")
             
             
         finally:
@@ -107,7 +113,7 @@ class StudentRepository:
             row = cursor.fetchone()
             
             if row is None:
-                
+                logger.error(f"Student Not Found | ID={student_id}")
                 raise StudentNotFoundError(student_id)
             
             
@@ -157,6 +163,9 @@ class StudentRepository:
             cursor.execute(query,values)
 
             self.__connection.commit()
+            
+            logger.info(f"Student Updated | ID={student.student_id}")
+
         finally:
             cursor.close()
 
@@ -176,6 +185,8 @@ class StudentRepository:
             cursor.execute(query,(student_id,))
 
             self.__connection.commit()
+            
+            logger.info(f"Student Deleted | ID={student_id}")
 
         finally:
             cursor.close()

@@ -1,6 +1,8 @@
 from services.student_service import StudentService
 from models.student import Student
 from exceptions.student_exceptions import StudentNotFoundError
+from utils.logger import logger
+
 
 
 class StudentController:
@@ -10,6 +12,8 @@ class StudentController:
     
     def add_student(self):
         
+        logger.info("Add Student Request Received")
+
         name = input("Enter Name: ").capitalize()
         age  = int(input("Enter Age: "))
         email = input("Enter Email: ")
@@ -30,6 +34,7 @@ class StudentController:
     
     def show_students(self):
         
+        logger.info("All Student Show Request")
         students =  self.__service.get_all_students()
 
         if not students :
@@ -43,6 +48,8 @@ class StudentController:
     def search_student(self):
         
         student_id = input("Enter Student ID: ")
+        
+        logger.info(f"Search Student Request | ID={student_id}")
 
         if not student_id.isdigit():
             print("Please enter valid id ")
@@ -62,6 +69,7 @@ class StudentController:
     def update_student(self):
         student_id = input("Enter Student ID: ")
          
+        logger.info(F"Update Student Request | ID={student_id}")
         
         try : 
             
@@ -111,6 +119,8 @@ class StudentController:
     def delete_student(self):
         
         student_id = input("Enter student ID: ")
+        
+        logger.info(f"Delete Student Request | ID={student_id}")
         
         if not student_id.isdigit():
             print("Invalid student ID")

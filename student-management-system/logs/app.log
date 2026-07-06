@@ -1,0 +1,10 @@
+2026-07-06 12:29:41,696 | INFO | Add Student Request Received
+2026-07-06 12:31:18,744 | INFO | Student Added | ID=7 | Name=Sameer shrema
+2026-07-06 12:31:36,913 | INFO | All Student Show Request
+2026-07-06 12:32:00,544 | INFO | Search Student Request | ID=6
+2026-07-06 12:32:37,744 | INFO | Update Student Request | ID=7
+2026-07-06 12:32:53,985 | INFO | Student Updated | ID=7
+2026-07-06 12:33:17,280 | INFO | Delete Student Request | ID=7
+2026-07-06 12:33:22,441 | INFO | Student Deleted | ID=7
+2026-07-06 12:35:37,753 | INFO | All Student Show Request
+2026-07-06 12:35:47,433 | INFO | Search Student Request | ID=6
