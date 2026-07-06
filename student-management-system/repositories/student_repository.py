@@ -45,6 +45,15 @@ class StudentRepository:
             cursor.close()
 
     
+    def __map_row_to_student(self,row):
+        return Student(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+            )
     
     
     def get_all_students(self):
@@ -71,18 +80,10 @@ class StudentRepository:
 
             students = []
 
+            
             for row in rows:
-                student = Student(
-                    row[0],
-                    row[1],
-                    row[2],
-                    row[3],
-                    row[4],
-                    row[5]
-                )
-
-                students.append(student)
-
+                students.append( self.__map_row_to_student(row))
+           
             return students
         
         finally: 
@@ -116,17 +117,7 @@ class StudentRepository:
                 logger.error(f"Student Not Found | ID={student_id}")
                 raise StudentNotFoundError(student_id)
             
-            
-            
-            student = Student(
-                            row[0],
-                            row[1],
-                            row[2],
-                            row[3],
-                            row[4],
-                            row[5]
-                            )
-            
+            student = self.__map_row_to_student(row)
             
             return student
         
