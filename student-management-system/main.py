@@ -1,24 +1,7 @@
-from database.connection import DatabaseConnection
-from models.student import Student
-from repositories.student_repository import StudentRepository
-from services.student_service import StudentService
-from controllers.student_controller import   StudentController
-from exceptions.student_exceptions import StudentNotFoundError
+from bootstrap.application import create_application
 
 
-
-
-db = DatabaseConnection()
-
-connection = db.connect()
-
-repo = StudentRepository(connection=connection)
-
-service = StudentService(repository=repo)
-
-controller = StudentController(service=service)
-# controller.add_student()
-
+controller = create_application()
 
 while True:
     
