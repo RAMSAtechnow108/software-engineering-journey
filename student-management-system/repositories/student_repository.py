@@ -1,4 +1,3 @@
-from mysql.connector import Error
 from models.student import Student
 from exceptions.student_exceptions import StudentNotFoundError
 
@@ -35,7 +34,7 @@ class StudentRepository:
             
             self.__connection.commit()
             
-            print("Student Added Successfully.")
+            
         finally:
             cursor.close()
 
@@ -108,7 +107,6 @@ class StudentRepository:
             row = cursor.fetchone()
             
             if row is None:
-                cursor.close()
                 
                 raise StudentNotFoundError(student_id)
             

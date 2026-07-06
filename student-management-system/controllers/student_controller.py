@@ -18,7 +18,14 @@ class StudentController:
 
         student = Student(None,name,age, email,phone,course)
 
-        self.__service.add_student(student=student)
+        try:
+            
+            self.__service.add_student(student=student)
+
+            print("Student Added Successfully.")
+            
+        except ValueError as e:
+            print(e)
 
     
     def show_students(self):
@@ -54,9 +61,7 @@ class StudentController:
 
     def update_student(self):
         student_id = input("Enter Student ID: ")
-        if not student_id.isdigit():
-            print("Invalid input")
-            return 
+         
         
         try : 
             
@@ -67,7 +72,7 @@ class StudentController:
         except StudentNotFoundError as e:
             print(e)
             return      
-            
+
         print(student)
         
         
@@ -94,7 +99,11 @@ class StudentController:
         if new_course:
             student.course = new_course
 
-        self.__service.update_student(student)
+        try:
+            self.__service.update_student(student)
+            print(f"Student details succesffully updated.")
+        except ValueError as e:
+            print(e)
         
         
     

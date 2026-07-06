@@ -1,5 +1,5 @@
 from repositories.student_repository import StudentRepository
-
+from validators.student_validator import StudentValidator
 
 
 class StudentService:
@@ -10,10 +10,14 @@ class StudentService:
 
     def add_student(self,student):
         
-        if student.age<18:
-            print("Student age must be at least 18")
-            return 
-    
+        StudentValidator.validate_name(student.name) 
+
+        StudentValidator.validate_age(student.age) 
+        
+        StudentValidator.validate_email(student.email) 
+
+        StudentValidator.validate_phone(student.phone) 
+        
         self.__repository.add_student(student=student)
         
     def get_all_students(self):
@@ -31,9 +35,14 @@ class StudentService:
     
     
     def update_student(self,student):
-        if student.age < 18:
-            print("Student age must be at least 18")
-            return 
+        
+        StudentValidator.validate_name(student.name) 
+
+        StudentValidator.validate_age(student.age) 
+        
+        StudentValidator.validate_email(student.email) 
+
+        StudentValidator.validate_phone(student.phone) 
         
         self.__repository.update_student_info(student=student)
         
