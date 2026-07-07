@@ -11,7 +11,29 @@ class StudentRepository:
     
     def __init__(self,connection):
         self.__connection = connection
+    
+    
+    def exists_by_email(self, email):
         
+        cursor = self.__connection.cursor()
+
+        try:
+            
+            query = """
+            SELECT 1 FROM students 
+            where email=%s
+            limit 1
+            """
+            
+            cursor.execute(query,(email,))
+            row = cursor.fetchone()
+            
+            return row is not None
+            
+        
+        finally:
+            
+            cursor.close()
     
     def add_student(self, student):
         

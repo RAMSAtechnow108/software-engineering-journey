@@ -1,5 +1,6 @@
 from repositories.student_repository import StudentRepository
 from validators.student_validator import StudentValidator
+from exceptions.validation_exceptions import DuplicateEmailError
 
 
 class StudentService:
@@ -15,9 +16,13 @@ class StudentService:
         StudentValidator.validate_age(student.age) 
         
         StudentValidator.validate_email(student.email) 
-
-        StudentValidator.validate_phone(student.phone) 
         
+        if self.__repository.exists_by_email(student.email):
+
+            raise DuplicateEmailError()
+        
+        StudentValidator.validate_phone(student.phone) 
+
         self.__repository.add_student(student=student)
         
     def get_all_students(self):

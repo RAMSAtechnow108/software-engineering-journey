@@ -31,3 +31,9 @@ class InvalidIdError(StudentManagementError):
         super().__init__(
             "Student ID is invalid."
         )
+
+
+class DuplicateEmailError(StudentManagementError):
+    
+    def __init__(self ):
+        super().__init__("Email already exists.")
