@@ -12,7 +12,6 @@ class StudentController:
     
     
     
-
     
     
     
@@ -21,10 +20,10 @@ class StudentController:
         logger.info("Add Student Request Received")
 
         name = input("Enter Name: ").capitalize()
-        age  = int(input("Enter Age: "))
+        age  = (input("Enter Age: "))
         email = input("Enter Email: ")
         phone = input("Enter Phone: ")
-        course = input("Enter Course: ")
+        course = input("Enter Course: ").capitalize()
 
         student = Student(None,name,age, email,phone,course)
 
@@ -34,15 +33,8 @@ class StudentController:
 
             print("Student Added Successfully.")
             
-        except ValueError as e:
+        except StudentManagementError as e:
             print(e)
-
-
-
-
-
-
-
 
 
 
@@ -62,16 +54,8 @@ class StudentController:
         for student in students:
             print(student)
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
+
         
     
     def search_student(self):
@@ -150,11 +134,6 @@ class StudentController:
             print(e)
         
         
-    
-    
-    
-    
-    
     
     
     

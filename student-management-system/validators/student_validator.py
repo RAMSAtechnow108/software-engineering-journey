@@ -1,36 +1,48 @@
+from exceptions.validation_exceptions import (
+    InvalidAgeError,
+    InvalidEmailError,
+    InvalidIdError,
+    InvalidNameError,
+    InvalidPhoneError,
+)
+
+
 class StudentValidator:
-    
+
+    @staticmethod
+    def validate_name(name):
+
+        if len(name.strip()) < 3:
+            raise InvalidNameError()
+
     @staticmethod
     def validate_age(age):
+        age = age.strip()
+
+        if not age.isdigit():
+            raise InvalidAgeError()
         
-        if age<18:
-            raise ValueError("Age must be at least 18.")
+        age = int(age)
 
+        if age < 18:
+            raise InvalidAgeError()
 
+        return age
+
+    @staticmethod
+    def validate_email(email):
+
+        if "@" not in email:
+            raise InvalidEmailError()
 
     @staticmethod
     def validate_phone(phone):
-        
+
         if not phone.isdigit():
-            raise ValueError("Phone must contain only digits.")
+            raise InvalidPhoneError()
 
-    
-    
-    @staticmethod
-    def validate_email(email):
-        
-        if "@" not in email:
-            raise ValueError("Invalid email address.")
-
-    
-    @staticmethod
-    def validate_name(name):
-        if len(name.strip()) <3:
-            raise ValueError("Name is too short.")
-    
-    
-    
     @staticmethod
     def validate_id(student_id):
-        if not student_id.isdigit():
-            raise ValueError("Student ID is invalid.")
+
+        if not str(student_id).isdigit():
+            raise InvalidIdError()

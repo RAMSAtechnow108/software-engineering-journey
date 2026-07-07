@@ -32,3 +32,20 @@
 2026-07-07 10:34:15,472 | INFO | Update Student Request | ID=1
 2026-07-07 10:34:20,257 | INFO | Student Updated | ID=1
 2026-07-07 10:36:28,737 | INFO | Delete Student Request | ID=6
+2026-07-07 19:51:43,818 | INFO | Search Student Request | ID=45
+2026-07-07 19:51:44,485 | ERROR | Student Not Found | ID=45
+2026-07-07 19:51:54,785 | INFO | Update Student Request | ID=8
+2026-07-07 19:51:54,788 | ERROR | Student Not Found | ID=8
+2026-07-07 21:00:43,331 | INFO | Add Student Request Received
+2026-07-07 21:02:14,110 | INFO | Add Student Request Received
+2026-07-07 21:02:48,528 | INFO | Add Student Request Received
+2026-07-07 21:03:06,759 | INFO | Add Student Request Received
+2026-07-07 21:05:32,508 | INFO | Add Student Request Received
+2026-07-07 21:05:51,627 | INFO | Add Student Request Received
+2026-07-07 21:06:13,914 | INFO | Add Student Request Received
+2026-07-07 21:07:56,947 | INFO | Add Student Request Received
+2026-07-07 21:08:46,722 | INFO | Add Student Request Received
+2026-07-07 21:09:36,577 | INFO | Add Student Request Received
+2026-07-07 21:10:21,484 | INFO | Search Student Request | ID=5
+2026-07-07 21:10:35,919 | INFO | Search Student Request | ID=dfd
+2026-07-07 21:10:35,934 | ERROR | Student Not Found | ID=dfd
