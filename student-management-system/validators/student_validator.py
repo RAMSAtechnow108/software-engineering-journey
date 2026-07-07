@@ -29,3 +29,8 @@ class StudentValidator:
             raise ValueError("Name is too short.")
     
     
+    
+    @staticmethod
+    def validate_id(student_id):
+        if not student_id.isdigit():
+            raise ValueError("Student ID is invalid.")

@@ -1,6 +1,6 @@
 from services.student_service import StudentService
 from models.student import Student
-from exceptions.student_exceptions import StudentNotFoundError
+from exceptions.student_exceptions import StudentManagementError
 from utils.logger import logger
 
 
@@ -9,6 +9,12 @@ class StudentController:
     
     def __init__(self,service:StudentService):
         self.__service = service
+    
+    
+    
+
+    
+    
     
     def add_student(self):
         
@@ -31,6 +37,18 @@ class StudentController:
         except ValueError as e:
             print(e)
 
+
+
+
+
+
+
+
+
+
+
+
+
     
     def show_students(self):
         
@@ -44,6 +62,17 @@ class StudentController:
         for student in students:
             print(student)
         
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     
     def search_student(self):
         
@@ -51,19 +80,27 @@ class StudentController:
         
         logger.info(f"Search Student Request | ID={student_id}")
 
-        if not student_id.isdigit():
-            print("Please enter valid id ")
-            return 
+         
         try:
             
             student = self.__service.get_student_by_id(student_id)
         
-        except StudentNotFoundError as error:
+        except StudentManagementError as error:
             print(error)
             return
         
         
         print(student)
+
+
+
+
+
+
+
+
+
+
 
 
     def update_student(self):
@@ -76,8 +113,7 @@ class StudentController:
             student = self.__service.get_student_by_id(student_id=student_id)
             
             
-            
-        except StudentNotFoundError as e:
+        except StudentManagementError as e:
             print(e)
             return      
 
@@ -116,6 +152,17 @@ class StudentController:
         
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     def delete_student(self):
         
         student_id = input("Enter student ID: ")
@@ -128,13 +175,16 @@ class StudentController:
         
         student_id = int(student_id)
 
-        student = self.__service.get_student_by_id(student_id=student_id)
 
-        if student is None:
-            print("Student Not Found !")
-            return
+        try:
+            
+            student = self.__service.get_student_by_id(student_id=student_id)
         
-        print(student)
+        except StudentManagementError as e:
+            print(e)
+            
+            return 
+        print(student) 
         
         choice = input("Are you sure? (Y/N): ").lower()
 

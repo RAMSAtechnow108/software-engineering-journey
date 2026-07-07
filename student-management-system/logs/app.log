@@ -19,3 +19,16 @@
 2026-07-06 13:35:54,464 | INFO | All Student Show Request
 2026-07-06 15:12:31,566 | INFO | All Student Show Request
 2026-07-06 15:25:12,038 | INFO | All Student Show Request
+2026-07-07 09:23:43,145 | INFO | Search Student Request | ID=786
+2026-07-07 09:23:43,359 | ERROR | Student Not Found | ID=786
+2026-07-07 09:25:05,044 | INFO | Update Student Request | ID=87
+2026-07-07 09:25:05,046 | ERROR | Student Not Found | ID=87
+2026-07-07 09:26:37,933 | INFO | Update Student Request | ID=98
+2026-07-07 09:26:37,936 | ERROR | Student Not Found | ID=98
+2026-07-07 10:33:51,825 | INFO | All Student Show Request
+2026-07-07 10:33:58,767 | INFO | Search Student Request | ID=2
+2026-07-07 10:34:08,961 | INFO | Update Student Request | ID=4
+2026-07-07 10:34:08,965 | ERROR | Student Not Found | ID=4
+2026-07-07 10:34:15,472 | INFO | Update Student Request | ID=1
+2026-07-07 10:34:20,257 | INFO | Student Updated | ID=1
+2026-07-07 10:36:28,737 | INFO | Delete Student Request | ID=6

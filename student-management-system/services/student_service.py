@@ -49,5 +49,6 @@ class StudentService:
         
     def delete_student(self,student_id):
         
+        StudentValidator.validate_id(student_id)
         self.__repository.delete_student(student_id=student_id)
         
