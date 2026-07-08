@@ -80,3 +80,10 @@
 2026-07-08 12:46:15,198 | ERROR | Student Not Found | ID=kjglkj
 2026-07-08 12:56:47,880 | INFO | Delete Student Request | ID=2
 2026-07-08 12:59:45,491 | INFO | Delete Student Request | ID=6
+2026-07-08 15:35:14,744 | INFO | All Student Show Request
+2026-07-08 16:27:30,706 | INFO | Add Student Request Received
+2026-07-08 16:27:59,037 | INFO | Student Added | ID=11 | Name=Shrek
+2026-07-08 16:31:25,524 | INFO | Add Student Request Received
+2026-07-08 16:31:52,546 | INFO | Student Added | ID=12 | Name=Shrek
+2026-07-08 16:31:52,577 | INFO | Audit Log Added | Student Added: Shrek
+2026-07-08 16:34:47,294 | INFO | Add Student Request Received

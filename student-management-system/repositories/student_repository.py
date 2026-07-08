@@ -76,9 +76,7 @@ class StudentRepository:
             
 
             cursor.execute(query,values)
-            
-            self.__connection.commit()
-            
+                        
             logger.info(f"Student Added | ID={cursor.lastrowid} | Name={student.name}")
             
             
@@ -166,7 +164,7 @@ class StudentRepository:
             
             cursor.close()
         
-    def update_student_info(self,student):
+    def update_student(self,student):
         
         cursor = self.__connection.cursor()
 
@@ -194,7 +192,6 @@ class StudentRepository:
             
             cursor.execute(query,values)
 
-            self.__connection.commit()
             
             logger.info(f"Student Updated | ID={student.student_id}")
 
@@ -216,7 +213,6 @@ class StudentRepository:
             
             cursor.execute(query,(student_id,))
 
-            self.__connection.commit()
             
             logger.info(f"Student Deleted | ID={student_id}")
 
