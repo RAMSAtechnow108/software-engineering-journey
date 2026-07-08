@@ -7,7 +7,7 @@ class AuditRepository():
     def __init__(self,connection):
         self.__connection = connection
         
-        
+        print("Audit Repo Connection:", id(self.__connection))
     def add_log(self,audit_log):
         
         cursor = self.__connection.cursor()

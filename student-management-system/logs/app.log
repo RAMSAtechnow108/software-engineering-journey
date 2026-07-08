@@ -87,3 +87,20 @@
 2026-07-08 16:31:52,546 | INFO | Student Added | ID=12 | Name=Shrek
 2026-07-08 16:31:52,577 | INFO | Audit Log Added | Student Added: Shrek
 2026-07-08 16:34:47,294 | INFO | Add Student Request Received
+2026-07-08 16:41:03,872 | INFO | Add Student Request Received
+2026-07-08 16:42:31,812 | INFO | Add Student Request Received
+2026-07-08 16:43:03,550 | INFO | Student Added | ID=13 | Name=Deepak
+2026-07-08 16:43:03,661 | INFO | Audit Log Added | Student Added: Deepak
+2026-07-08 16:44:52,987 | INFO | Add Student Request Received
+2026-07-08 16:45:25,416 | INFO | Student Added | ID=14 | Name=Mitesh
+2026-07-08 16:45:25,418 | INFO | Audit Log Added | Student Added: Mitesh
+2026-07-08 16:45:40,164 | INFO | Add Student Request Received
+2026-07-08 16:46:10,847 | INFO | Add Student Request Received
+2026-07-08 16:46:30,684 | INFO | Student Added | ID=15 | Name=Chhotu
+2026-07-08 16:46:30,686 | INFO | Audit Log Added | Student Added: Chhotu
+2026-07-08 16:52:43,590 | INFO | Add Student Request Received
+2026-07-08 16:53:23,033 | INFO | Student Added | ID=16 | Name=Tappu
+2026-07-08 16:53:23,039 | INFO | Audit Log Added | Student Added: Tappu
+2026-07-08 16:59:18,037 | INFO | Add Student Request Received
+2026-07-08 16:59:55,135 | INFO | Student Added | ID=17 | Name=Rollback test
+2026-07-08 16:59:55,136 | INFO | Audit Log Added | Student Added: Rollback test

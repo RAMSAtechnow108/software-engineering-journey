@@ -30,6 +30,7 @@ class DatabaseConnection:
 )
             
 
+            print("Connection ID:", id(self.__connection))
             return self.__connection
         
         except Error as error:

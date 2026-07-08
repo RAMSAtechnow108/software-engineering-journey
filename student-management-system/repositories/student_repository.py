@@ -11,8 +11,7 @@ class StudentRepository:
     
     def __init__(self,connection):
         self.__connection = connection
-    
-    
+
     def exists_by_email_except_student(self, email, student_id):
         
         cursor = self.__connection.cursor()

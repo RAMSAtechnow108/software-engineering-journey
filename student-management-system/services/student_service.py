@@ -17,6 +17,7 @@ class StudentService:
 
 
     def add_student(self,student):
+
         try:
             StudentValidator.validate_name(student.name) 
 
@@ -36,11 +37,11 @@ class StudentService:
             audit_log = AuditLog(None,f"Student Added: {student.name}")
             
             self.__audit_repository.add_log(audit_log)
-            
+    
             self.__connection.commit()
             
         except Exception:
-              
+
             self.__connection.rollback()
 
             raise 
