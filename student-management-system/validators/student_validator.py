@@ -43,5 +43,13 @@ class StudentValidator:
     @staticmethod
     def validate_id(student_id):
 
-        if not str(student_id).isdigit():
+        try:
+            student_id = int(student_id)
+        except ValueError:
             raise InvalidIdError()
+        
+        if student_id<=0:
+            raise InvalidIdError()
+        
+        return student_id
+        

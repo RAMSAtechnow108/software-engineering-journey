@@ -148,11 +148,6 @@ class StudentController:
         
         logger.info(f"Delete Student Request | ID={student_id}")
         
-        if not student_id.isdigit():
-            print("Invalid student ID")
-            return 
-        
-        student_id = int(student_id)
 
 
         try:
