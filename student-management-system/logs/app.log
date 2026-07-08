@@ -50,3 +50,29 @@
 2026-07-07 21:10:35,919 | INFO | Search Student Request | ID=dfd
 2026-07-07 21:10:35,934 | ERROR | Student Not Found | ID=dfd
 2026-07-07 21:34:02,161 | INFO | Add Student Request Received
+2026-07-08 08:35:56,156 | INFO | Update Student Request | ID=1
+2026-07-08 08:36:49,887 | INFO | Update Student Request | ID=1
+2026-07-08 08:41:30,670 | INFO | Update Student Request | ID=1
+2026-07-08 08:41:34,193 | INFO | Student Updated | ID=1
+2026-07-08 08:50:29,477 | INFO | Update Student Request | ID=1
+2026-07-08 08:50:36,259 | INFO | Student Updated | ID=1
+2026-07-08 09:30:53,824 | INFO | Update Student Request | ID=skfk
+2026-07-08 09:30:53,857 | ERROR | Student Not Found | ID=skfk
+2026-07-08 09:31:15,946 | INFO | Add Student Request Received
+2026-07-08 09:31:37,767 | INFO | Student Added | ID=8 | Name=Aman
+2026-07-08 09:35:15,776 | INFO | Add Student Request Received
+2026-07-08 09:37:50,039 | INFO | Student Added | ID=9 | Name=Sejal 
+2026-07-08 09:43:15,696 | INFO | Add Student Request Received
+2026-07-08 09:44:19,722 | INFO | Add Student Request Received
+2026-07-08 09:44:39,989 | INFO | Add Student Request Received
+2026-07-08 09:45:13,010 | INFO | Add Student Request Received
+2026-07-08 09:45:35,157 | INFO | Student Added | ID=10 | Name=Pawan
+2026-07-08 09:46:10,128 | INFO | Update Student Request | ID=1
+2026-07-08 09:47:36,949 | INFO | Update Student Request | ID=
+2026-07-08 09:47:36,952 | ERROR | Student Not Found | ID=
+2026-07-08 09:48:15,620 | INFO | Update Student Request | ID=1
+2026-07-08 09:49:21,604 | INFO | Update Student Request | ID=1
+2026-07-08 09:49:36,872 | INFO | Student Updated | ID=1
+2026-07-08 09:50:30,093 | INFO | Add Student Request Received
+2026-07-08 09:50:52,952 | INFO | Update Student Request | ID=1
+2026-07-08 09:50:59,541 | INFO | Student Updated | ID=1

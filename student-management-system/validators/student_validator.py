@@ -17,12 +17,11 @@ class StudentValidator:
 
     @staticmethod
     def validate_age(age):
-        age = age.strip()
 
-        if not age.isdigit():
-            raise InvalidAgeError()
-        
-        age = int(age)
+        if isinstance(age, str):
+            if not age.isdigit():
+                raise InvalidAgeError()
+            age = int(age)
 
         if age < 18:
             raise InvalidAgeError()

@@ -20,8 +20,8 @@ class StudentController:
         logger.info("Add Student Request Received")
 
         name = input("Enter Name: ").capitalize()
-        age  = (input("Enter Age: "))
-        email = input("Enter Email: ")
+        age  = input("Enter Age: ")
+        email = input("Enter Email: ").strip().lower()
         phone = input("Enter Phone: ")
         course = input("Enter Course: ").capitalize()
 

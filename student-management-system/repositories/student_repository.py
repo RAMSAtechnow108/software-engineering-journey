@@ -13,6 +13,25 @@ class StudentRepository:
         self.__connection = connection
     
     
+    def exists_by_email_except_student(self, email, student_id):
+        
+        cursor = self.__connection.cursor()
+        try: 
+            
+            query = """
+            SELECT 1 FROM students
+            WHERE email = %s AND student_id != %s LIMIT 1
+            """
+
+            cursor.execute(query,(email,student_id))
+
+            row = cursor.fetchone()
+
+            return row is not None
+
+        finally :
+            cursor.close()
+    
     def exists_by_email(self, email):
         
         cursor = self.__connection.cursor()

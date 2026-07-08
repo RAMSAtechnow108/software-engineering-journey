@@ -17,19 +17,20 @@ class StudentService:
         
         StudentValidator.validate_email(student.email) 
         
+        StudentValidator.validate_phone(student.phone) 
+
+        
         if self.__repository.exists_by_email(student.email):
 
             raise DuplicateEmailError()
         
-        StudentValidator.validate_phone(student.phone) 
-
         self.__repository.add_student(student=student)
+        
         
     def get_all_students(self):
 
-        student = self.__repository.get_all_students()
+        return self.__repository.get_all_students()
 
-        return student
     
     
     def get_student_by_id(self,student_id):
@@ -48,6 +49,10 @@ class StudentService:
         StudentValidator.validate_email(student.email) 
 
         StudentValidator.validate_phone(student.phone) 
+        
+        if self.__repository.exists_by_email_except_student(student.email, student.student_id):
+            
+            raise DuplicateEmailError()
         
         self.__repository.update_student_info(student=student)
         
