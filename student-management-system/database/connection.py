@@ -1,5 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
+from exceptions.database_exceptions import DatabaseOperationError
+from utils.logger import logger
 
 
 
@@ -29,10 +31,11 @@ class DatabaseConnection:
                     database=DB_DATABASE
 )
             
-
-            print("Connection ID:", id(self.__connection))
+            logger.info("Database connection established successfully.")
             return self.__connection
         
         except Error as error:
-            print(error)
+            logger.error(f"Database connection failed: {error}")
+            
+            raise DatabaseOperationError()
 

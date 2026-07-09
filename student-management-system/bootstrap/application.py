@@ -6,7 +6,6 @@ from repositories.audit_repository import AuditRepository
 
 
 
-
 def create_application():
     
     db = DatabaseConnection()
@@ -16,6 +15,7 @@ def create_application():
     repository = StudentRepository(connection)
 
     audit_repository = AuditRepository(connection)
+    
     
     service = StudentService(repository, audit_repository, connection)
 

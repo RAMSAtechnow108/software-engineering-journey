@@ -1,7 +1,15 @@
 from bootstrap.application import create_application
+from exceptions.database_exceptions import DatabaseOperationError
 
 
-controller = create_application()
+try:
+    
+    controller = create_application()
+
+except DatabaseOperationError as error:
+    print(error)
+    exit()
+
 
 while True:
     

@@ -104,3 +104,20 @@
 2026-07-08 16:59:18,037 | INFO | Add Student Request Received
 2026-07-08 16:59:55,135 | INFO | Student Added | ID=17 | Name=Rollback test
 2026-07-08 16:59:55,136 | INFO | Audit Log Added | Student Added: Rollback test
+2026-07-08 17:05:42,685 | INFO | All Student Show Request
+2026-07-08 17:06:06,196 | INFO | Update Student Request | ID=1
+2026-07-08 17:06:30,081 | INFO | Student Updated | ID=1
+2026-07-09 16:19:05,140 | INFO | All Student Show Request
+2026-07-09 16:19:13,526 | INFO | Search Student Request | ID=5
+2026-07-09 16:20:22,121 | INFO | All Student Show Request
+2026-07-09 16:22:55,205 | INFO | All Student Show Request
+2026-07-09 16:27:49,452 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2026-07-09 16:27:55,230 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2026-07-09 16:28:56,506 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2026-07-09 16:31:42,207 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2026-07-09 16:31:53,722 | INFO | Database connection established successfully.
+2026-07-09 16:31:56,662 | INFO | All Student Show Request
+2026-07-09 21:02:41,414 | INFO | Database connection established successfully.
+2026-07-09 21:02:43,263 | INFO | All Student Show Request
+2026-07-09 21:03:04,353 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
+2026-07-09 21:06:01,488 | INFO | Database connection established successfully.
