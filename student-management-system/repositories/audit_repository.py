@@ -1,5 +1,8 @@
 from models.audit_log import AuditLog
 from utils.logger import logger
+from mysql.connector import Error
+from exceptions.database_exceptions import DatabaseOperationError
+
 
 
 class AuditRepository():
@@ -7,7 +10,7 @@ class AuditRepository():
     def __init__(self,connection):
         self.__connection = connection
         
-        print("Audit Repo Connection:", id(self.__connection))
+
     def add_log(self,audit_log):
         
         cursor = self.__connection.cursor()
@@ -15,7 +18,7 @@ class AuditRepository():
         try:   
             
             query = """
-            INSERT INTO audit_logs
+            INSERT INTO audit_log
             (action)
             values
             (%s)
@@ -26,6 +29,14 @@ class AuditRepository():
 
             logger.info(f"Audit Log Added | {audit_log.action}")
             
+        except Error as error:
+
+            logger.error(
+                f"Database error while adding audit log: {error}"
+            )
+
+            raise DatabaseOperationError()
+        
         finally:
             
             cursor.close()

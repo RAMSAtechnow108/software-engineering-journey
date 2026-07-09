@@ -121,3 +121,10 @@
 2026-07-09 21:02:43,263 | INFO | All Student Show Request
 2026-07-09 21:03:04,353 | ERROR | Database connection failed: 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 2026-07-09 21:06:01,488 | INFO | Database connection established successfully.
+2026-07-09 21:16:13,860 | INFO | Database connection established successfully.
+2026-07-09 21:16:15,112 | INFO | Add Student Request Received
+2026-07-09 21:16:36,954 | INFO | Student Added | ID=18 | Name=Kishan
+2026-07-09 21:18:13,595 | INFO | Database connection established successfully.
+2026-07-09 21:18:18,143 | INFO | Add Student Request Received
+2026-07-09 21:18:34,178 | INFO | Student Added | ID=19 | Name=Kishan
+2026-07-09 21:18:34,254 | ERROR | Database error while adding audit log: 1146 (42S02): Table 'student_management_db.audit_log' doesn't exist
