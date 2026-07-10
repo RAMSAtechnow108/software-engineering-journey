@@ -128,3 +128,22 @@
 2026-07-09 21:18:18,143 | INFO | Add Student Request Received
 2026-07-09 21:18:34,178 | INFO | Student Added | ID=19 | Name=Kishan
 2026-07-09 21:18:34,254 | ERROR | Database error while adding audit log: 1146 (42S02): Table 'student_management_db.audit_log' doesn't exist
+2026-07-10 12:30:22,611 | INFO | Database connection established successfully.
+2026-07-10 12:30:25,502 | INFO | All Student Show Request
+2026-07-10 12:30:34,629 | INFO | Search Student Request | ID=6
+2026-07-10 12:30:47,599 | INFO | Update Student Request | ID=6
+2026-07-10 12:33:12,176 | INFO | Database connection established successfully.
+2026-07-10 12:33:16,413 | INFO | Update Student Request | ID=6
+2026-07-10 12:33:23,254 | INFO | Student Updated | ID=6
+2026-07-10 12:33:42,709 | INFO | Delete Student Request | ID=7
+2026-07-10 12:33:42,711 | ERROR | Student Not Found | ID=7
+2026-07-10 12:33:49,447 | INFO | Delete Student Request | ID=11
+2026-07-10 12:33:49,448 | ERROR | Student Not Found | ID=11
+2026-07-10 12:35:22,538 | INFO | Delete Student Request | ID=12
+2026-07-10 12:35:40,321 | INFO | Delete Student Request | ID=12
+2026-07-10 12:35:43,966 | INFO | Student Deleted | ID=12
+2026-07-10 12:35:43,974 | ERROR | Database error while adding audit log: 1146 (42S02): Table 'student_management_db.audit_log' doesn't exist
+2026-07-10 12:36:59,955 | INFO | Database connection established successfully.
+2026-07-10 12:37:06,017 | INFO | Delete Student Request | ID=12
+2026-07-10 12:37:07,874 | INFO | Student Deleted | ID=12
+2026-07-10 12:37:07,910 | INFO | Audit Log Added | Student Deleted: 12

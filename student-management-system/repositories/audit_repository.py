@@ -18,7 +18,7 @@ class AuditRepository():
         try:   
             
             query = """
-            INSERT INTO audit_log
+            INSERT INTO audit_logs
             (action)
             values
             (%s)

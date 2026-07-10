@@ -216,7 +216,7 @@ class StudentRepository:
             cursor.close()
 
 
-    def update_student_info(self, student):
+    def update_student(self, student):
 
         cursor = self.__connection.cursor()
 
