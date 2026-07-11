@@ -147,3 +147,16 @@
 2026-07-10 12:37:06,017 | INFO | Delete Student Request | ID=12
 2026-07-10 12:37:07,874 | INFO | Student Deleted | ID=12
 2026-07-10 12:37:07,910 | INFO | Audit Log Added | Student Deleted: 12
+2026-07-11 21:06:25,383 | INFO | Database connection established successfully.
+2026-07-11 21:06:47,069 | INFO | Update Student Request | ID=33  
+2026-07-11 21:06:47,391 | ERROR | Student Not Found | ID=33  
+2026-07-11 21:07:45,415 | INFO | Search Student Request | ID=5
+2026-07-11 21:07:48,915 | INFO | All Student Show Request
+2026-07-11 21:07:54,413 | INFO | All Student Show Request
+2026-07-11 21:09:15,986 | INFO | Database connection established successfully.
+2026-07-11 21:09:23,725 | INFO | Update Student Request | ID=3
+2026-07-11 21:09:32,706 | INFO | Student Updated | ID=3
+2026-07-11 21:09:50,572 | INFO | Update Student Request | ID=4
+2026-07-11 21:09:50,574 | ERROR | Student Not Found | ID=4
+2026-07-11 21:09:54,133 | INFO | Update Student Request | ID=2
+2026-07-11 21:10:03,668 | INFO | Student Updated | ID=2

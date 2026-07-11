@@ -19,11 +19,11 @@ class StudentController:
         
         logger.info("Add Student Request Received")
 
-        name = input("Enter Name: ").capitalize()
-        age  = input("Enter Age: ")
+        name = input("Enter Name: ").capitalize().strip()
+        age  = input("Enter Age: ").strip()
         email = input("Enter Email: ").strip().lower()
-        phone = input("Enter Phone: ")
-        course = input("Enter Course: ").capitalize()
+        phone = input("Enter Phone: ").strip()
+        course = input("Enter Course: ").capitalize().strip()
 
         student = Student(None,name,age, email,phone,course)
 
@@ -60,7 +60,7 @@ class StudentController:
     
     def search_student(self):
         
-        student_id = input("Enter Student ID: ")
+        student_id = input("Enter Student ID: ").strip()
         
         logger.info(f"Search Student Request | ID={student_id}")
 
@@ -88,7 +88,7 @@ class StudentController:
 
 
     def update_student(self):
-        student_id = input("Enter Student ID: ")
+        student_id = input("Enter Student ID: ").strip()
          
         logger.info(F"Update Student Request | ID={student_id}")
         
@@ -104,26 +104,26 @@ class StudentController:
         print(student)
         
         
-        new_name = input(f"Current Name: {student.name}\nEnter New Name (Press Enter to keep current): ")
+        new_name = input(f"Current Name: {student.name}\nEnter New Name (Press Enter to keep current): ").strip()
         if new_name:
             student.name = new_name
 
-        new_age = input(f"Current Age: {student.age}\nEnter New Age (Press Enter to keep current): ")
+        new_age = input(f"Current Age: {student.age}\nEnter New Age (Press Enter to keep current): ").strip()
         if new_age:
             if not new_age.isdigit():
                 print("Invalid age")
                 return
             student.age = int(new_age)
 
-        new_email = input(f"Current Email: {student.email}\nEnter New Email (Press Enter to keep current): ")
+        new_email = input(f"Current Email: {student.email}\nEnter New Email (Press Enter to keep current): ").strip()
         if new_email:
             student.email = new_email
 
-        new_phone = input(f"Current Phone: {student.phone}\nEnter New Phone (Press Enter to keep current): ")
+        new_phone = input(f"Current Phone: {student.phone}\nEnter New Phone (Press Enter to keep current): ").strip()
         if new_phone:
             student.phone = new_phone
 
-        new_course = input(f"Current Course: {student.course}\nEnter New Course (Press Enter to keep current): ")
+        new_course = input(f"Current Course: {student.course}\nEnter New Course (Press Enter to keep current): ").strip()
         if new_course:
             student.course = new_course
 

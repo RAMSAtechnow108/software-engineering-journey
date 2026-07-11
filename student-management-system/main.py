@@ -25,7 +25,7 @@ while True:
     print("5. Delete Student")
     print("6. Exit")
 
-    choice = input("\nEnter Choice: ")
+    choice = input("\nEnter Choice: ").strip()
 
     if not choice.isdigit():
         print("Invalid Choice")
