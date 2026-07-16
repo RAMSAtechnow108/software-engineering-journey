@@ -67,7 +67,7 @@ class ProductRepository:
                 "quantity": 40
             }
         ]
-    print(existing_products)
+  
     def get_products(self):
         return self.existing_products
 
@@ -77,11 +77,21 @@ class ProductRepository:
         for product in self.existing_products:
             if product["id"]==id:
                 return product
-        raise ProductNotFoundError(f"Product with id {id} not found") 
+        raise ProductNotFoundError(f"Product with id {id} not found")
+     
         
     def create_product(self,product: ProductCreate):
-        return product
-    
+        last_id = self.existing_products[-1]["id"]+1
+        new_product = {
+            "id":last_id,
+            "name": product.name,
+            "price": product.price,
+            "quantity":product.quantity
+        }
+        self.existing_products.append(new_product)
+
+        return new_product
+
     
     def update_product(self, id:int,product:ProductUpdate):
         existing_product = self.get_product(id)
@@ -98,5 +108,4 @@ class ProductRepository:
     def delete_product(self,id:int):
         existing_product = self.get_product(id)
         self.existing_products.remove(existing_product)
-        print(self.existing_products)
         

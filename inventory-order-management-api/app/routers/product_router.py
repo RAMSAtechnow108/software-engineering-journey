@@ -30,7 +30,7 @@ def get_product(id:int ,service:ProductService = Depends(get_product_service)):
 
 
 
-@router.post("/")
+@router.post("/",response_model=ProductResponse)
 def create_product(product: ProductCreate, service:ProductService = Depends(get_product_service)):
     return service.create_product(product)
 
