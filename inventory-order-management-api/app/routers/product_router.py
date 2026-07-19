@@ -3,15 +3,17 @@ from fastapi import Depends
 from app.repositories.product_repository import ProductRepository
 from app.services.product_service import ProductService
 from app.schemas.product_schema import ProductCreate, ProductResponse,ProductUpdate
+from sqlalchemy.orm import Session
+from app.core.database import get_db
 
 
 router = APIRouter()
 
 
 
-def get_product_service():
+def get_product_service(db:Session= Depends(get_db)):
     
-    repository = ProductRepository()
+    repository = ProductRepository(db)
 
     service = ProductService(repository)
 
@@ -30,7 +32,7 @@ def get_product(id:int ,service:ProductService = Depends(get_product_service)):
 
 
 
-@router.post("/",response_model=ProductResponse)
+@router.post("/",status_code=201, response_model=ProductResponse)
 def create_product(product: ProductCreate, service:ProductService = Depends(get_product_service)):
     return service.create_product(product)
 

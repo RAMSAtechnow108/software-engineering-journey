@@ -3,5 +3,4 @@ test.py
 .env
 venv/
 __pycache__/
-.vscode
-.env.example
+.vscode/
