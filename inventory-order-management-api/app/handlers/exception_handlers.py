@@ -1,15 +1,15 @@
 from fastapi.responses import JSONResponse
-from fastapi import status,Request
-from app.exceptions.product_exceptions import ProductNotFoundError
+from fastapi import Request
+from app.exceptions.product_exceptions import AppException
 
 
-
-
-async def product_not_found_handler(request: Request,exc:ProductNotFoundError):
-
+async def app_exception_handler(request:Request, exc: AppException):
     return JSONResponse(
-        status_code=status.HTTP_404_NOT_FOUND,
+        status_code =exc.status_code,
+        
         content = {
-            "message":str(exc)
+            "success":False,
+            "message": exc.message,
+            "error_code": exc.error_code
         }
     )

@@ -15,8 +15,4 @@ class Settings(BaseSettings):
 
     
 settings = Settings()
-print(settings.db_user)
-print(settings.db_password)
-print(settings.db_host)
-print(settings.db_port)
-print(settings.db_name)
+

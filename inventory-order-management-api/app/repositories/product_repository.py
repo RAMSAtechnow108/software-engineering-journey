@@ -21,7 +21,7 @@ class ProductRepository:
         product = self.db.execute(stmt).scalar_one_or_none()
                 
         if product is None:
-            raise ProductNotFoundError(f"Product with id {id} not found")
+            raise ProductNotFoundError(id)
 
         return product
     
