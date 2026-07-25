@@ -40,3 +40,5 @@ def setup_logging():
 
     root_logger.addHandler(stream_handler)
     root_logger.addHandler(file_handler)
+    
+    root_logger.info("Logging system initialized")
