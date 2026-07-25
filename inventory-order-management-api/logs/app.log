@@ -1,0 +1,304 @@
+2026-07-24 19:58:07 | DEBUG    | __main__ | test.py:8 | Debug Message
+2026-07-24 19:58:07 | INFO     | __main__ | test.py:9 | Application Started
+2026-07-24 19:58:07 | WARNING  | __main__ | test.py:10 | Low dist spaces
+2026-07-24 19:58:07 | ERROR    | __main__ | test.py:11 | Database connection crashed
+2026-07-24 19:58:07 | CRITICAL | __main__ | test.py:12 | Application crashed
+2026-07-24 19:58:58 | DEBUG    | __main__ | test.py:9 | Debug Message
+2026-07-24 19:58:58 | DEBUG    | __main__ | test.py:9 | Debug Message
+2026-07-24 19:58:58 | INFO     | __main__ | test.py:10 | Application Started
+2026-07-24 19:58:58 | INFO     | __main__ | test.py:10 | Application Started
+2026-07-24 19:58:58 | WARNING  | __main__ | test.py:11 | Low dist spaces
+2026-07-24 19:58:58 | WARNING  | __main__ | test.py:11 | Low dist spaces
+2026-07-24 19:58:58 | ERROR    | __main__ | test.py:12 | Database connection crashed
+2026-07-24 19:58:58 | ERROR    | __main__ | test.py:12 | Database connection crashed
+2026-07-24 19:58:58 | CRITICAL | __main__ | test.py:13 | Application crashed
+2026-07-24 19:58:58 | CRITICAL | __main__ | test.py:13 | Application crashed
+2026-07-24 19:58:58 | INFO     | root | test.py:14 | Testing duplication handerles
+2026-07-24 19:58:58 | INFO     | root | test.py:14 | Testing duplication handerles
+2026-07-24 20:01:16 | DEBUG    | __main__ | test.py:9 | Debug Message
+2026-07-24 20:01:16 | INFO     | __main__ | test.py:10 | Application Started
+2026-07-24 20:01:16 | WARNING  | __main__ | test.py:11 | Low dist spaces
+2026-07-24 20:01:16 | ERROR    | __main__ | test.py:12 | Database connection crashed
+2026-07-24 20:01:16 | CRITICAL | __main__ | test.py:13 | Application crashed
+2026-07-24 20:01:16 | INFO     | root | test.py:14 | Testing duplication handerles
+2026-07-24 20:01:31 | DEBUG    | __main__ | test.py:9 | Debug Message
+2026-07-24 20:01:31 | INFO     | __main__ | test.py:10 | Application Started
+2026-07-24 20:01:31 | WARNING  | __main__ | test.py:11 | Low dist spaces
+2026-07-24 20:01:31 | ERROR    | __main__ | test.py:12 | Database connection crashed
+2026-07-24 20:01:31 | CRITICAL | __main__ | test.py:13 | Application crashed
+2026-07-24 20:01:31 | INFO     | root | test.py:14 | Testing duplication handerles
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-24 20:54:12 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-24 20:54:13 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-24 20:54:38 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-24 20:54:38 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products`
+2026-07-24 20:54:38 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [generated in 0.00174s] {}
+2026-07-24 20:54:38 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:42:02 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:03 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:42:05 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:43:29 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:52 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:55 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:47:58 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:48:28 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:48:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products` 
+WHERE `Products`.id = %(id_1)s
+2026-07-25 17:48:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [generated in 0.00193s] {'id_1': 1}
+2026-07-25 17:48:28 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:49:16 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:49:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products` 
+WHERE `Products`.id = %(id_1)s
+2026-07-25 17:49:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [cached since 48.1s ago] {'id_1': 7}
+2026-07-25 17:49:16 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:27 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:50:29 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:50:39 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:50:39 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products` 
+WHERE `Products`.id = %(id_1)s
+2026-07-25 17:50:39 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [generated in 0.00404s] {'id_1': 7}
+2026-07-25 17:50:39 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:51:21 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:51:25 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:51:25 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products` 
+WHERE `Products`.id = %(id_1)s
+2026-07-25 17:51:25 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [generated in 0.00130s] {'id_1': 7}
+2026-07-25 17:51:25 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:51:33 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:51:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT `Products`.id, `Products`.name, `Products`.price, `Products`.quantity 
+FROM `Products` 
+WHERE `Products`.id = %(id_1)s
+2026-07-25 17:51:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [cached since 7.63s ago] {'id_1': 7}
+2026-07-25 17:51:33 | INFO     | sqlalchemy.engine.Engine | base.py:2715 | ROLLBACK
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:13 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 17:52:15 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:28 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:33 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:00:56 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:01:04 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:30:17 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:30:18 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:30:18 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:30:18 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:30:18 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:35:50 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 18:43:37 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:00 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:05 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:10 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:13 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT DATABASE()
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@sql_mode
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | SELECT @@lower_case_table_names
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:2712 | BEGIN (implicit)
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | DESCRIBE `product_db`.`Products`
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:1848 | [raw sql] {}
+2026-07-25 19:33:16 | INFO     | sqlalchemy.engine.Engine | base.py:2718 | COMMIT

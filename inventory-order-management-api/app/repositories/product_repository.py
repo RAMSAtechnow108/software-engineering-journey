@@ -3,6 +3,14 @@ from app.exceptions.product_exceptions import ProductNotFoundError
 from sqlalchemy.orm import Session
 from app.models.product import Product
 from sqlalchemy import select
+import logging
+
+
+
+logger = logging.getLogger(__name__)
+
+
+
 
 
 class ProductRepository:
@@ -17,12 +25,13 @@ class ProductRepository:
 
 
     def get_product(self,id:int):
+        10/0
         stmt = select(Product).where(Product.id == id)
         product = self.db.execute(stmt).scalar_one_or_none()
                 
         if product is None:
             raise ProductNotFoundError(id)
-
+        
         return product
     
     
