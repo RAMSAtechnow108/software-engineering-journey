@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from app.core.database import get_db
 
 
-router = APIRouter()
+product_router = APIRouter()
 
 
 
@@ -21,28 +21,28 @@ def get_product_service(db:Session= Depends(get_db)):
 
 
 
-@router.get("/",response_model = list[ProductResponse])
+@product_router.get("/",response_model = list[ProductResponse])
 def get_products(service:ProductService = Depends(get_product_service)):
     return service.get_products()
 
 
-@router.get("/{id}",response_model = ProductResponse)
+@product_router.get("/{id}",response_model = ProductResponse)
 def get_product(id:int ,service:ProductService = Depends(get_product_service)):
     return service.get_product(id)
 
 
 
-@router.post("/",status_code=201, response_model=ProductResponse)
+@product_router.post("/",status_code=201, response_model=ProductResponse)
 def create_product(product: ProductCreate, service:ProductService = Depends(get_product_service)):
     return service.create_product(product)
 
 
-@router.patch("/{id}",response_model = ProductResponse)
+@product_router.patch("/{id}",response_model = ProductResponse)
 def update_product(id: int, product: ProductUpdate,service:ProductService = Depends(get_product_service)):
     return service.update_product(id,product)
     
 
-@router.delete("/{id}")
+@product_router.delete("/{id}")
 def delete_product(id: int, service:ProductService = Depends(get_product_service)):
     service.delete_product(id)
     return { 
