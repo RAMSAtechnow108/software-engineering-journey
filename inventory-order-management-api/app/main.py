@@ -3,7 +3,7 @@ from fastapi import FastAPI
 from  app.routers.product_router import product_router
 from app.routers.category_router import category_router
 
-from app.exceptions.product_exceptions import AppException
+from app.exceptions.app_exception import AppException
 from app.handlers.exception_handlers import app_exception_handler
 from app.handlers.global_handler import global_exception_handler
 

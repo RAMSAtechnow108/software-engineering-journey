@@ -1,13 +1,5 @@
+from app.exceptions.app_exception import AppException
 from fastapi import status
-
-
-class AppException(Exception):
-    
-    def __init__(self, message, status_code, error_code):
-        self.message = message
-        self.status_code = status_code
-        self.error_code = error_code
-        super().__init__(message)
 
 
 class ProductNotFoundError(AppException):
@@ -30,10 +22,31 @@ class DuplicateProductError(AppException):
         )
 
 
-class InvalidStockError(AppException):
-    def __init__(self, stock:int):
+class InvalidSortFieldError(AppException):
+    
+    def __init__(self, sort_by:str):
         super().__init__(
-            message=f"Invalid stock value: {stock}",
+            message=f"Invalid sort field: {sort_by}",
             status_code= status.HTTP_400_BAD_REQUEST,
-            error_code= "INVALID_STOCK"
+            error_code= "INVALID_SORT_FIELD"
         )
+        
+
+class InvalidOrderFieldError(AppException):
+    
+    def __init__(self, order:str):
+        super().__init__(
+            message=f"Invalid sort order: '{order}'. Allowed values are 'asc' and 'desc",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            error_code="INVALID_SORT_ORDER"
+        )
+        
+class InvalidPriceRangeError(AppException):
+    
+    def __init__(self, min_price, max_price):
+        super().__init__(
+            message="Minimum price cannot be greater than maximum price.",
+            status_code=status.HTTP_404_NOT_FOUND,
+            error_code="INVALID_PRICE_RANGE"
+        ) 
+        

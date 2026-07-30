@@ -12,15 +12,32 @@ logger = logging.getLogger(__name__)
 
 
 class ProductRepository:
+    
     def __init__(self,db:Session):
         self.db = db
         
         
+    def get_products(self, offset: int, limit: int, column, category_id:int, min_price: float, max_price:float, search :str):
         
-    def get_products(self):
-       
-        logger.info("Fetching all products from database")
-        return self.db.execute(select(Product)).scalars().all()
+        query = select(Product)
+        
+        if category_id is not None:
+            query = query.where(Product.category_id==category_id)
+        
+        if min_price is not None:
+            query = query.where(Product.price >= min_price)
+            
+        if max_price is not None:
+            query = query.where(Product.price <= max_price)
+            
+        if search is not None:
+            query = query.where(Product.name.ilike(f"%{search}%"))
+            
+        query = query.order_by(column).offset(offset).limit(limit)
+
+        result = self.db.execute(query)
+
+        return result.scalars().all()
 
 
 
@@ -124,7 +141,7 @@ class ProductRepository:
         except Exception:
             self.db.rollback()
             logger.exception(f"Database error while deleting product with ID {id}")            
-            raise
+            raise   
         
             
         

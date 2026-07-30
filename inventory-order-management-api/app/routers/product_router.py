@@ -5,6 +5,8 @@ from app.services.product_service import ProductService
 from app.schemas.product_schema import ProductCreate, ProductResponse,ProductUpdate
 from sqlalchemy.orm import Session
 from app.core.database import get_db
+from fastapi import Query
+
 
 
 product_router = APIRouter()
@@ -22,8 +24,19 @@ def get_product_service(db:Session= Depends(get_db)):
 
 
 @product_router.get("/",response_model = list[ProductResponse])
-def get_products(service:ProductService = Depends(get_product_service)):
-    return service.get_products()
+def get_products(
+    page: int = Query(default=1, ge=1), 
+    limit: int = Query(default=10, ge=1,le=100),
+    sort_by :str = Query(default="name"),
+    order: str = Query(default="asc"),
+    category_id: int | None = Query(default=None, ge=1),
+    min_price: float | None = Query(default=None, ge=0),
+    max_price: float | None = Query(default=None, ge=0),
+    search: str | None = Query(default=None),
+    service:ProductService = Depends(get_product_service)
+    ):
+        
+    return service.get_products(page,limit,sort_by,order,category_id,min_price,max_price,search)
 
 
 @product_router.get("/{id}",response_model = ProductResponse)

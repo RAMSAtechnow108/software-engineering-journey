@@ -1,5 +1,5 @@
 from fastapi import status
-from app.exceptions.product_exceptions import AppException
+from app.exceptions.app_exception import AppException
 
 class CategoryNotFoundError(AppException):
     

@@ -5,4 +5,5 @@ venv/
 __pycache__/
 .vscode/
 bank_project/
-.log
+logs/app.log
+seed.py
