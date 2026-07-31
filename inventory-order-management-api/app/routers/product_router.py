@@ -39,9 +39,9 @@ def get_products(
     return service.get_products(page,limit,sort_by,order,category_id,min_price,max_price,search)
 
 
-@product_router.get("/{id}",response_model = ProductResponse)
-def get_product(id:int ,service:ProductService = Depends(get_product_service)):
-    return service.get_product(id)
+@product_router.get("/{product_id}",response_model = ProductResponse)
+def get_product(product_id:int ,service:ProductService = Depends(get_product_service)):
+    return service.get_product(product_id)
 
 
 
@@ -50,14 +50,14 @@ def create_product(product: ProductCreate, service:ProductService = Depends(get_
     return service.create_product(product)
 
 
-@product_router.patch("/{id}",response_model = ProductResponse)
-def update_product(id: int, product: ProductUpdate,service:ProductService = Depends(get_product_service)):
-    return service.update_product(id,product)
+@product_router.patch("/{product_id}",response_model = ProductResponse)
+def update_product(product_id: int, product: ProductUpdate,service:ProductService = Depends(get_product_service)):
+    return service.update_product(product_id,product)
     
 
-@product_router.delete("/{id}")
-def delete_product(id: int, service:ProductService = Depends(get_product_service)):
-    service.delete_product(id)
+@product_router.delete("/{product_id}")
+def delete_product(product_id: int, service:ProductService = Depends(get_product_service)):
+    service.delete_product(product_id)
     return { 
             "success": True,
             "message": "Product deleted successfully"

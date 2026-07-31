@@ -31,3 +31,24 @@ class CategoryInUseError(AppException):
             status_code=status.HTTP_409_CONFLICT,
             error_code="CATEGORY_IN_USE"
         )
+        
+class InvalidSortFieldError(AppException):
+    
+    def __init__(self, sort_by):
+        super().__init__(
+            message=f"Invalid sort field {sort_by}",
+            status_code=status.HTTP_409_BAD_REQUEST,
+            error_code="INVALID_SORT_ERROR"
+        )
+    
+
+
+class InvalidOrderFieldError(AppException):
+    
+    def __init__(self, order:str):
+        super().__init__(
+            message=f"Invalid sort order: '{order}'. Allowed values are 'asc' and 'desc",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            error_code="INVALID_SORT_ORDER"
+        )
+        

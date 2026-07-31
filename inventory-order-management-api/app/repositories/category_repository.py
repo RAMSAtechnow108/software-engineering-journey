@@ -21,13 +21,21 @@ class CategoryRepository:
 
 
 
-
-    def get_all_categories(self):
+    def get_all_categories(self,offset:int,limit:int,column, category_name:str):
+        
+        
         try:
+            
             logger.info("Fetching all categories from database.")
 
-            stmt = select(Category)
-            result = self.db.execute(stmt)
+            query = select(Category)
+                
+            if category_name is not None:
+                query = query.where(Category.name.ilike(f"%{category_name}%"))
+            
+            query = query.order_by(column).offset(offset).limit(limit)
+            
+            result = self.db.execute(query)
             categories = result.scalars().all()
 
             logger.info(

@@ -43,7 +43,7 @@ class InvalidOrderFieldError(AppException):
         
 class InvalidPriceRangeError(AppException):
     
-    def __init__(self, min_price, max_price):
+    def __init__(self):
         super().__init__(
             message="Minimum price cannot be greater than maximum price.",
             status_code=status.HTTP_404_NOT_FOUND,
