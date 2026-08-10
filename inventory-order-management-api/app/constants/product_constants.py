@@ -2,8 +2,7 @@ from app.models.product import Product
 
 PRODUCT_SORT_FIELDS = {
     "name": Product.name,
-    "price": Product.price,
-    "quantity": Product.quantity,
+    "price": Product.price
 }
 
 SORT_ORDER = {

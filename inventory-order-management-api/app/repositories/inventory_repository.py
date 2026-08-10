@@ -1,0 +1,102 @@
+from sqlalchemy.orm import Session
+from sqlalchemy import select
+import logging
+from sqlalchemy.exc import SQLAlchemyError
+
+from app.schemas.inventory_schema import InventoryUpdate
+
+
+
+from app.models.inventory import Inventory
+
+from app.exceptions.inventory_exceptions import InventoryNotFoundError
+
+
+logger = logging.getLogger(__name__)
+
+class InventoryRepository:
+    
+    def __init__(self, db:Session):
+        self.db  = db
+        
+    
+    def get_inventory_by_product_id(self,product_id:int):
+        
+        try:
+            logger.info("Getting inventory of product with product_id=%s",product_id)
+            
+            result = self.db.execute(
+                select(Inventory).where(
+                    Inventory.product_id==product_id
+                )
+            )
+
+            inventory = result.scalar_one_or_none()
+
+            if inventory is None:
+                logger.warning("Inventory not found fro product_id=%s",product_id)
+                raise InventoryNotFoundError(product_id)
+            
+            logger.info("Inventory fetched successfully for product_id=%s",product_id)
+
+            return inventory
+        except InventoryNotFoundError:
+            raise
+        
+        except SQLAlchemyError:
+            logger.exception("Database error while getting iventory for product id=%s",product_id)
+            raise
+        
+        except Exception:
+            logger.exception("Unexpected error while getting product inventory with id=%s",product_id)
+            raise
+    
+    
+    def update_inventory(self, product_id:int, inventory_data: InventoryUpdate):
+        
+        logger.info("Updating inventory with product_id %s",product_id)
+        
+        try:
+            
+            inventory = self.get_inventory_by_product_id(product_id)
+            
+            logger.debug("Applying request field updates")
+
+            inventory.total_quantity = inventory_data.total_quantity
+            
+            logger.debug("Field updates applied successfully.")
+
+            logger.debug("Committing changes to database")
+            
+            self.db.commit()
+            
+            self.db.refresh(inventory)
+            
+            logger.info("Inventory for product_id=%s updated successfully",product_id)
+
+            return inventory
+        
+        except InventoryNotFoundError:
+            raise
+        
+        except SQLAlchemyError:
+            self.db.rollback()
+            logger.exception(
+                "Database error while updating inventory")
+            raise
+
+        except Exception:
+            self.db.rollback()
+            logger.exception("Database error while updating inventory")
+            raise
+            
+
+
+        
+        
+        
+        
+
+        
+            
+

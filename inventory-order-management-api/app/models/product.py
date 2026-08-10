@@ -11,11 +11,18 @@ class Product(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
     price: Mapped[Decimal] = mapped_column(Numeric(10,2))
-    quantity: Mapped[int] = mapped_column()
     
-    category_id: Mapped[int] = mapped_column(ForeignKey("Categories.id",ondelete="RESTRICT"))
+    category_id: Mapped[int] = mapped_column(
+        ForeignKey("Categories.id",ondelete="RESTRICT")
+        )
     
     category: Mapped["Category"] = relationship(back_populates="products")
+    
+    inventory : Mapped["Inventory"] = relationship(
+        back_populates="product", 
+        cascade="all, delete-orphan", 
+        uselist=False
+        )
 
     
     

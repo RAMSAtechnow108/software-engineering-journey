@@ -58,7 +58,7 @@ class ProductService:
             logger.info(f"Getting product with ID {product_id} successfully")
             return product
             
-    def create_product(self, product):
+    def create_product(self, product:ProductCreate):
         logger.info("Creating product")
 
         new_product = self.repository.create_product(product)
@@ -67,7 +67,7 @@ class ProductService:
 
         return new_product
     
-    def update_product(self,product_id: int, product:ProductUpdate):
+    def update_product(self,product_id: int, product):
         logger.info(f"Updating product with ID {product_id}")
         update_product = self.repository.update_product(product_id,product)
         logger.info(f"Product with ID {product_id} updated successfully")

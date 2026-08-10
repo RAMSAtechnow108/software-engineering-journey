@@ -16,7 +16,7 @@ class DuplicateProductError(AppException):
     
     def __init__(self, product_name :str):
         super().__init__(
-            message = f"Prduct '{product_name}' already exists.",
+            message = f"Product '{product_name}' already exists.",
             status_code = status.HTTP_409_CONFLICT,
             error_code = "DUPLICATE_PRODUCT"
         )
@@ -36,7 +36,7 @@ class InvalidOrderFieldError(AppException):
     
     def __init__(self, order:str):
         super().__init__(
-            message=f"Invalid sort order: '{order}'. Allowed values are 'asc' and 'desc",
+            message=f"Invalid sort order: '{order}'. " "Allowed values are 'asc' and 'desc'.",
             status_code=status.HTTP_400_BAD_REQUEST,
             error_code="INVALID_SORT_ORDER"
         )
@@ -46,7 +46,7 @@ class InvalidPriceRangeError(AppException):
     def __init__(self):
         super().__init__(
             message="Minimum price cannot be greater than maximum price.",
-            status_code=status.HTTP_404_NOT_FOUND,
+            status_code=status.HTTP_400_BAD_REQUEST,
             error_code="INVALID_PRICE_RANGE"
         ) 
         

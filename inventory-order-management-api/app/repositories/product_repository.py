@@ -1,10 +1,11 @@
 from app.schemas.product_schema import ProductCreate,ProductUpdate
-from app.exceptions.product_exceptions import ProductNotFoundError
+from app.exceptions.product_exceptions import ProductNotFoundError,DuplicateProductError
 from sqlalchemy.orm import Session
 from app.models.product import Product
 from sqlalchemy import select
 import logging
 from sqlalchemy.exc import SQLAlchemyError, IntegrityError
+from app.models.inventory import Inventory
 
 
 
@@ -56,6 +57,8 @@ class ProductRepository:
 
         except Exception:
             logger.exception('Unexpected error while fetching categories.')
+            
+            
 
     def get_product_by_id(self,product_id:int):
         
@@ -73,6 +76,9 @@ class ProductRepository:
 
             return product
         
+        except ProductNotFoundError:
+            raise
+        
         except SQLAlchemyError:
             logger.exception("Database error while fetching category.")
             raise
@@ -87,26 +93,52 @@ class ProductRepository:
         logger.info("Creating new product")
         
         logger.debug(
-            "Product Data -> Name: %s, Price: %s, Quantity: %s",
+            "Product Data -> Name: %s, Price: %s, Category_id: %s",
             product.name,
             product.price,
-            product.quantity,
+            product.category_id
         )
                 
         try:
             
             new_product = Product(
-                        name = product.name,
-                        price=product.price, 
-                        quantity=product.quantity
-                    )
+                name=product.name,
+                price=product.price,
+                category_id=product.category_id
+            )
             
+                        
             self.db.add(new_product)
+            self.db.flush()
+            
+            logger.debug("Creating inventory for product_id=%a",new_product.id)
+
+            inventory = Inventory(
+                product_id=new_product.id,
+                total_quantity=product.inventory.total_quantity,
+                reserved_quantity=0
+            )
+            self.db.add(inventory)
+            
             self.db.commit()
+            
+            logger.info("Inventory created successfully for product_id=%s",new_product.id)
             self.db.refresh(new_product)
             
             logger.info("Product created successfully with ID %s",new_product.id)
             return new_product
+
+        except IntegrityError:
+            self.db.rollback()
+        
+            logger.warning(
+                        "Category '%s' already exists.",product.name)
+            raise DuplicateProductError(product.name)
+        
+        except SQLAlchemyError:
+            self.db.rollback()
+            logger.exception("Database error while creating productds.")
+            raise
         
         except Exception:
             self.db.rollback()
@@ -118,8 +150,8 @@ class ProductRepository:
         
         logger.info("Updating product with ID %s",product_id)
         
-        existing_product = self.get_product(product_id)
         
+        existing_product = self.get_product_by_id(product_id)
         try:
             
             logger.debug("Applying request field updates")
@@ -128,8 +160,7 @@ class ProductRepository:
                 existing_product.name = product.name
             if product.price is not None:
                 existing_product.price = product.price
-            if product.quantity is not None:
-                existing_product.quantity = product.quantity
+            
             
             logger.debug("Field updates applied successfully")
             
@@ -148,7 +179,7 @@ class ProductRepository:
         
         except Exception:
             self.db.rollback()
-            logger.exception("Database error while updateting product")
+            logger.exception("Database error while updating product")
             raise
         
     
@@ -158,7 +189,7 @@ class ProductRepository:
         
         try:
             
-            existing_product = self.get_product(product_id)
+            existing_product = self.get_product_by_id(product_id)
             
             logger.debug("Product found. Deleting product with ID %s", product_id)
             self.db.delete(existing_product)
