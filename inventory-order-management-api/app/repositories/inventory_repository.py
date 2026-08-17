@@ -34,7 +34,7 @@ class InventoryRepository:
             inventory = result.scalar_one_or_none()
 
             if inventory is None:
-                logger.warning("Inventory not found fro product_id=%s",product_id)
+                logger.warning("Inventory not found from product_id=%s",product_id)
                 raise InventoryNotFoundError(product_id)
             
             logger.info("Inventory fetched successfully for product_id=%s",product_id)

@@ -128,12 +128,7 @@ class ProductRepository:
             logger.info("Product created successfully with ID %s",new_product.id)
             return new_product
 
-        except IntegrityError:
-            self.db.rollback()
-        
-            logger.warning(
-                        "Category '%s' already exists.",product.name)
-            raise DuplicateProductError(product.name)
+
         
         except SQLAlchemyError:
             self.db.rollback()
