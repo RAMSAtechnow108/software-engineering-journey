@@ -9,3 +9,17 @@ class InventoryNotFoundError(AppException):
             status_code=status.HTTP_404_NOT_FOUND,
             error_code="INVENTORY_NOT_FOUND"
         )
+        
+    
+class InsufficientInventoryError(AppException):
+    
+    def __init__(self, product_id:int, requested_quantity: int, available_quantity:int):
+        super().__init__(
+            message=(
+                f"Insufficient inventory for product {product_id}.  "
+                f"Requested: {requested_quantity}, "
+                f"Available: {available_quantity}"
+                ),
+            status_code=status.HTTP_409_CONFLICT,
+            error_code="INSUFFICIENT_INVENTORY"
+        )

@@ -9,7 +9,7 @@ from app.schemas.inventory_schema import InventoryUpdate
 
 from app.models.inventory import Inventory
 
-from app.exceptions.inventory_exceptions import InventoryNotFoundError
+from app.exceptions.inventory_exceptions import InventoryNotFoundError, InsufficientInventoryError
 
 
 logger = logging.getLogger(__name__)
@@ -91,12 +91,65 @@ class InventoryRepository:
             raise
             
 
+    def reserve_stock(self, product_id: int, quantity: int):
 
-        
-        
-        
-        
+        logger.info(
+            "Starting stock reservation: product_id=%s, requested_quantity=%s",
+            product_id,
+            quantity
+        )
 
-        
-            
+        try:
 
+            inventory = self.get_inventory_by_product_id(product_id)
+
+            available_quantity = inventory.available_quantity
+
+            if available_quantity < quantity:
+
+                logger.warning(
+                    "Insufficient inventory: product_id=%s, requested=%s, available=%s",
+                    product_id,
+                    quantity,
+                    available_quantity
+                )
+
+                raise InsufficientInventoryError(
+                    product_id=product_id,
+                    requested_quantity=quantity,
+                    available_quantity=available_quantity
+                )
+
+            old_reserved = inventory.reserved_quantity
+
+            inventory.reserved_quantity += quantity
+
+            logger.info(
+                "Stock reserved successfully: product_id=%s, old_reserved=%s, new_reserved=%s",
+                product_id,
+                old_reserved,
+                inventory.reserved_quantity
+            )
+
+            return inventory
+
+        except InsufficientInventoryError:
+            raise
+
+        except SQLAlchemyError:
+            logger.exception(
+                "Database error while reserving stock: "
+                "product_id=%s, quantity=%s",
+                product_id,
+                quantity
+            )
+            raise
+
+        except Exception:
+            logger.exception(
+                "Unexpected error while reserving stock: "
+                "product_id=%s, quantity=%s",
+                product_id,
+                quantity
+            )
+            raise

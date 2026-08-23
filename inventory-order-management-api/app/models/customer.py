@@ -1,7 +1,7 @@
 from datetime import datetime
 
 from sqlalchemy import String, DateTime, func,text, UniqueConstraint
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column,relationship
 
 from app.core.database import Base
 
@@ -23,6 +23,10 @@ class Customer(Base):
 
     updated_at: Mapped[datetime] = mapped_column(DateTime, nullable=False, server_default=text("CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP"), )
 
+
+    orders: Mapped[list["Order"]] = relationship(
+    back_populates="customer"
+)
 
     __table_args__ = (
         UniqueConstraint("email", name = "uq_customers_email"),
