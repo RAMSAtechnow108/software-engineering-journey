@@ -41,7 +41,7 @@ def get_products(
 
 @product_router.get("/{product_id}",response_model = ProductResponse)
 def get_product(product_id:int ,service:ProductService = Depends(get_product_service)):
-    return service.get_product(product_id)
+    return service.get_product_by_id(product_id)
 
 
 

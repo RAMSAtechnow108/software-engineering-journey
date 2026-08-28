@@ -101,7 +101,7 @@ class InventoryRepository:
 
         try:
 
-            inventory = self.get_inventory_by_product_id(product_id)
+            inventory = self.get_inventory_for_update(product_id)
 
             available_quantity = inventory.available_quantity
 
@@ -152,4 +152,36 @@ class InventoryRepository:
                 product_id,
                 quantity
             )
+            raise
+        
+        
+    
+    def get_inventory_for_update(self, product_id:int):
+        
+        try:
+            
+            logger.info("Getting inventory with row lock for product_id=%s",product_id)
+
+            result = self.db.execute(select(Inventory).where(Inventory.product_id==product_id).with_for_update())
+
+            inventory = result.scalar_one_or_none()
+
+            if inventory is None:
+                logger.warning("Inventory not found for product_id=%s",product_id)
+                raise InventoryNotFoundError(product_id)
+
+            logger.info("Inventory locked successfully for product_id=%s",product_id)
+
+            return inventory
+        
+        except InventoryNotFoundError:
+            raise
+        
+        
+        except SQLAlchemyError:
+            logger.exception("Database error while locking inventory for product_id=%s",product_id)
+            raise
+        
+        except Exception:
+            logger.exception("Unexpected error while locking inventory for product_id=%s",product_id)
             raise
