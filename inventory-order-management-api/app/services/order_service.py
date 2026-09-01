@@ -1,7 +1,7 @@
 import logging
 from decimal import Decimal
 from app.schemas.order_schema import OrderCreate
-
+from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -43,8 +43,10 @@ class OrderService:
         try:
             
             self.customer_repository.get_customer_by_id(customer_id)
-
-            order = self.order_repository.create_order(customer_id)
+            
+            reservation_until = datetime.now() + timedelta(minutes=15)
+            
+            order = self.order_repository.create_order(customer_id=customer_id, reservation_until=reservation_until)
             
             total_amount = Decimal("0.00")
 
@@ -54,20 +56,13 @@ class OrderService:
 
                 self.inventory_repository.reserve_stock(product_id=item.product_id, quantity=item.quantity)
 
-                self.order_item_repository.create_order_item(
-                    order_id = order.id,
-                    product_id = product.id,
-                    product_name = product.name,
-                    quantity = item.quantity,
-                    unit_price = product.price
-                )
+                self.order_item_repository.create_order_item(order_id = order.id,product_id = product.id,product_name = product.name,quantity = item.quantity,unit_price = product.price)
         
                 total_amount += (product.price * item.quantity)
 
             order.total_amount = total_amount
 
             self.order_repository.db.commit()
-
             self.order_repository.db.refresh(order)
 
             logger.info("Order created successfully: order_id=%s",order.id)

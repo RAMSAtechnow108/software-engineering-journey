@@ -31,6 +31,7 @@ class OrderResponse(BaseModel):
     status: OrderStatus
     total_amount: Decimal
     created_at: datetime
+    reservation_until: datetime
     updated_at: datetime
     items: list[OrderItemResponse]
 

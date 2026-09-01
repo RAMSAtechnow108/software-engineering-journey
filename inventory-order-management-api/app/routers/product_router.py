@@ -52,6 +52,8 @@ def create_product(product: ProductCreate, service:ProductService = Depends(get_
 
 @product_router.patch("/{product_id}",response_model = ProductResponse)
 def update_product(product_id: int, product: ProductUpdate,service:ProductService = Depends(get_product_service)):
+    
+    
     return service.update_product(product_id,product)
     
 

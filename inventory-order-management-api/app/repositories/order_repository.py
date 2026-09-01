@@ -4,6 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from decimal import Decimal
 
 from uuid import uuid4
+from datetime import datetime
 
 from app.models.order import Order
 from app.models.order_item import OrderItem
@@ -49,7 +50,7 @@ class OrderRepository:
             logger.exception("Unexpected error while fetching order with order_id%s", order_id)
             raise
         
-    def create_order(self, customer_id: int):
+    def create_order(self, customer_id: int,reservation_until:datetime):
         
         logger.info("Creating order for customer_id=%s", customer_id)
 
@@ -61,7 +62,8 @@ class OrderRepository:
                 order_number=order_number,
                 customer_id = customer_id,
                 status = OrderStatus.PENDING,
-                total_amount = Decimal("0.00")
+                total_amount = Decimal("0.00"),
+                reservation_until = reservation_until
             )
             
             self.db.add(new_order)

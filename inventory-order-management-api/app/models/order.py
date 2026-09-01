@@ -41,6 +41,10 @@ class Order(Base):
         nullable=False,
         server_default=func.now()
     )
+    
+    reservation_until: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False
+    )
 
     updated_at: Mapped[datetime] = mapped_column(
         DateTime,
