@@ -1,4 +1,5 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import select
 from sqlalchemy.exc import SQLAlchemyError
 
 from app.models.order_item import OrderItem
@@ -43,3 +44,31 @@ class OrderItemRepository:
         except Exception:
             logger.exception("Unexpected error while creating order item")
             raise
+        
+        
+    def get_order_items(self, order_id:int):
+        
+        logger.info("Getting order items for order_id=%s",order_id)
+
+        try:
+            
+            result = self.db.execute(select(OrderItem).where(OrderItem.order_id == order_id))
+
+            order_items = result.scalars().all()
+            
+            logger.info("Found %s order items for order_id=%s",len(order_items),order_id)
+
+            
+            return order_items
+        
+        except SQLAlchemyError:
+            logger.exception("Database error while getting order items for order_id=%s",order_id)
+
+            raise
+        
+        except Exception:
+            logger.exception("Unexpected error while getting order items for order_id=%s",order_id)
+            raise
+        
+
+            

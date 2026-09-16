@@ -9,7 +9,7 @@ from app.core.database import Base
 
 class Customer(Base):
     
-    __tablename__ = "Customers"
+    __tablename__ = "customers"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 

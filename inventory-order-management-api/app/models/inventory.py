@@ -7,11 +7,11 @@ from sqlalchemy import func,text
 
 class Inventory(Base):
     
-    __tablename__ = "Inventory"
+    __tablename__ = "inventory"
 
     id : Mapped[int] = mapped_column(primary_key=True)
     
-    product_id : Mapped[int] = mapped_column(ForeignKey("Products.id", ondelete="CASCADE"), unique=True)
+    product_id : Mapped[int] = mapped_column(ForeignKey("products.id", ondelete="CASCADE"), unique=True)
 
     total_quantity : Mapped[int] = mapped_column(default=0)
 

@@ -86,3 +86,53 @@ class OrderRepository:
             logger.exception(
                 "Unexcepted error while creating order for customer_id=%s", customer_id
             )
+            
+            
+    def get_expired_orders(self, current_time: datetime):
+        
+        logger.info("Finding expired pending orders before=%s",current_time)
+        
+        try:
+            
+            result = self.db.execute(select(Order).where(
+                Order.status == OrderStatus.PENDING,
+                Order.reservation_until <= current_time
+            ))
+            
+            orders = result.scalars().all()
+
+            logger.info("Found %s expired pending orders", len(orders))
+
+            return orders
+        except SQLAlchemyError:
+            logger.exception("Database error while finding expired orders")
+            raise
+        
+        except Exception:
+            logger.exception("Unexpected error while finding expired orders")
+            raise
+        
+    
+    def get_order_for_update(self, order_id:int):
+        
+        logger.info("Loking order for update, order_id=%s",order_id)
+        
+        try:
+            
+            result = self.db.execute(select(Order).where(Order.id == order_id).with_for_update())
+
+            order = result.scalar_one_or_none()
+
+            logger.info("Order locked sucessfully, order_id=%s",order_id)
+
+            return order
+        
+        except SQLAlchemyError:
+            logger.exception("Database error while locking order, order_id=%s",order_id)
+            
+            raise
+        
+        except Exception:
+
+            logger.exception("Unexpected error while locking order, order_id=%s",order_id)
+            raise

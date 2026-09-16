@@ -9,7 +9,7 @@ from app.core.database import Base
 
 class OrderItem(Base):
 
-    __tablename__ = "OrderItems"
+    __tablename__ = "orderitems"
 
     id: Mapped[int] = mapped_column(
         primary_key=True
@@ -17,7 +17,7 @@ class OrderItem(Base):
 
     order_id: Mapped[int] = mapped_column(
         ForeignKey(
-            "Orders.id",
+            "orders.id",
             ondelete="RESTRICT"
         ),
         nullable=False
@@ -25,7 +25,7 @@ class OrderItem(Base):
 
     product_id: Mapped[int] = mapped_column(
         ForeignKey(
-            "Products.id",
+            "products.id",
             ondelete="RESTRICT"
         ),
         nullable=False

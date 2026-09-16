@@ -1,6 +1,9 @@
 import logging
 from decimal import Decimal
+from sqlalchemy.exc import SQLAlchemyError
+
 from app.schemas.order_schema import OrderCreate
+from app.constants.order_constants import OrderStatus
 from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
@@ -79,4 +82,56 @@ class OrderService:
             )
 
             raise
+    
+    
+    def expire_orders(self, current_time: datetime):
+        
+        logger.info("Starting expired order processing at=%s", current_time)
+
+        try:
+            
+            expired_orders = self.order_repository.get_expired_orders(current_time)
+
+
+            for expired_order in expired_orders:
+                
+                order = self.order_repository.get_order_for_update(expired_order.id)
+
+                if order is None:
+                    continue
+                
+                if order.status != OrderStatus.PENDING:
+                    continue
+                
+                if order.reservation_until >current_time:
+                    continue
+                
+                order_items = self.order_item_repository.get_order_items(order.id)
+
+                for item in order_items:
                     
+                    inventory = self.inventory_repository.get_inventory_for_update(item.product_id)
+                    
+                    if inventory.reserved_quantity<item.quantity:
+                        raise ValueError(f"Insuficient reserved quantity for product_id={item.product_id}")
+                        
+                    inventory.reserved_quantity -= item.quantity
+
+                order.status = OrderStatus.EXPIRED
+                
+            self.order_repository.db.commit()
+                
+            logger.info("Expired orders processed successfully")
+        
+        except SQLAlchemyError:
+            self.order_repository.db.rollback()
+            logger.exception("Database error while expiring orders")
+            raise
+
+        except Exception:
+            
+            self.order_repository.db.rollback()
+
+            logger.exception("Error while expiring orders")
+            raise
+

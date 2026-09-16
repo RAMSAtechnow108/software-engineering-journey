@@ -6,14 +6,14 @@ from app.core.database import Base
 
 
 class Product(Base):
-    __tablename__ = "Products"
+    __tablename__ = "products"
 
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(100))
     price: Mapped[Decimal] = mapped_column(Numeric(10,2))
     
     category_id: Mapped[int] = mapped_column(
-        ForeignKey("Categories.id",ondelete="RESTRICT")
+        ForeignKey("categories.id",ondelete="RESTRICT")
         )
     
     category: Mapped["Category"] = relationship(back_populates="products")

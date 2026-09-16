@@ -9,7 +9,7 @@ from app.constants.order_constants import OrderStatus
 
 class Order(Base):
 
-    __tablename__ = "Orders"
+    __tablename__ = "orders"
 
     id: Mapped[int] = mapped_column(primary_key=True)
 
@@ -21,7 +21,7 @@ class Order(Base):
 
     customer_id: Mapped[int] = mapped_column(
         ForeignKey(
-            "Customers.id",
+            "customers.id",
             ondelete="RESTRICT"
         ),
         nullable=False

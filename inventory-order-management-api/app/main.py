@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI 
 
 from app.routers.product_router import product_router
 from app.routers.category_router import category_router
@@ -12,14 +12,23 @@ from app.handlers.global_handler import global_exception_handler
 
 from app.core.database import Base,engine
 
-
 from app.core.logging_config import setup_logging
 
+from app.scheduler.order_expiry import start_scheduler, stop_scheduler
 
 setup_logging()
 
 app = FastAPI()
 
+
+@app.on_event("startup")
+def startup_event():
+    start_scheduler()
+
+
+@app.on_event("shutdown")
+def shutdown_event():
+    stop_scheduler()
 
 Base.metadata.create_all(bind=engine)
 
