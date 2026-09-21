@@ -46,7 +46,7 @@ def test_get_expired_orders():
             customer_id = customer.id,
             status = OrderStatus.PENDING,
             total_amount = 0,
-            reservation_until = current_time
+            reservation_until = current_time - timedelta(minutes=1)
         )
         
         db.add(expired_order)

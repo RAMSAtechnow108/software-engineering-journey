@@ -136,3 +136,28 @@ class OrderRepository:
 
             logger.exception("Unexpected error while locking order, order_id=%s",order_id)
             raise
+        
+        
+    def update_order_status(self, order:Order, new_status: OrderStatus):
+        
+        logger.info("Updating order status, order=%s, new_status=%s",order.id, new_status)
+
+        try:
+            
+            order.status = new_status
+            
+            self.db.flush()
+
+            logger.info("Order status update successfully, order_id=%s, new_status=%s",order.id, new_status)
+
+            return order
+
+        except SQLAlchemyError:
+            logger.exception(
+                "Database error while updating order status, order_id=%s",order.id
+            )
+            raise
+        
+        except Exception:
+            logger.exception("Unexpected error while updating order status, order_id=%s", order.id)
+            raise

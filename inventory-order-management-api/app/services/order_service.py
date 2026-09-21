@@ -4,6 +4,8 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from app.schemas.order_schema import OrderCreate
 from app.constants.order_constants import OrderStatus
+from app.domain.order_state.state_machine import OrderStateMachine
+
 from datetime import datetime, timedelta
 
 logger = logging.getLogger(__name__)
@@ -17,13 +19,15 @@ class OrderService:
         customer_repository,
         product_repository,
         inventory_repository,
-        order_item_repository
+        order_item_repository,
+        order_state_machine = OrderStateMachine
     ):
         self.order_repository = order_repository
         self.customer_repository = customer_repository
         self.product_repository = product_repository
         self.inventory_repository = inventory_repository
         self.order_item_repository = order_item_repository
+        self.order_state_machine = order_state_machine
         
         
     
@@ -117,6 +121,10 @@ class OrderService:
                         
                     inventory.reserved_quantity -= item.quantity
 
+                self.order_state_machine.validate_transition(
+                    order.status, OrderStatus.EXPIRED
+                )
+                
                 order.status = OrderStatus.EXPIRED
                 
             self.order_repository.db.commit()
@@ -135,3 +143,32 @@ class OrderService:
             logger.exception("Error while expiring orders")
             raise
 
+
+    def update_order_status(self, order_id:int, new_status:OrderStatus):
+        
+        logger.info("Updating order status, order_id=%s, new_status=%s", order_id, new_status)
+        
+        try:
+            
+            order = self.order_repository.get_order_by_id(order_id)
+            
+            self.order_state_machine.validate_transition(order.status, new_status)
+            
+            update_order = self.order_repository.update_order_status(order=order,new_status=new_status)
+
+            self.order_repository.db.commit()
+            self.order_repository.db.refresh(update_order)
+
+            logger.info("Order status updated successfully, order_id=%s, new_status=%s", order_id, new_status)
+
+            return update_order
+
+        except SQLAlchemyError:
+            self.order_repository.db.rollback()
+            logger.exception("Database error while updating order status of order_id=%s", order_id)
+            raise
+        
+        except Exception:
+            self.order_repository.db.rollback()
+            logger.exception("Unexpected error while updating order status of order_id=%s", order_id)
+            raise

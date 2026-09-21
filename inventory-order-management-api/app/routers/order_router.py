@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 
 from app.core.database import get_db
 
-from app.schemas.order_schema import OrderCreate, OrderResponse
+from app.schemas.order_schema import OrderCreate, OrderResponse,OrderStatusUpdate
 from app.services.order_service import OrderService
 
 from app.repositories.order_repository import OrderRepository
@@ -46,3 +46,7 @@ def get_order_by_id(order_id:int, service: OrderService = Depends(get_order_serv
 def create_order(customer_id:int, order_data: OrderCreate,service:OrderService=Depends(get_order_service)):
     return service.create_order(customer_id,order_data)
 
+
+@order_router.patch("/{order_id}/status", response_model=OrderResponse)
+def update_order_status(order_id:int, status_data: OrderStatusUpdate, service:OrderService=Depends(get_order_service)):
+    return service.update_order_status(order_id=order_id, new_status=status_data.status)

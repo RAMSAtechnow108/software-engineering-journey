@@ -12,6 +12,10 @@ class OrderItemCreate(BaseModel):
 
 class OrderCreate(BaseModel):
     items: list[OrderItemCreate] = Field(min_length=1)
+    
+
+class OrderStatusUpdate(BaseModel):
+    status: OrderStatus
 
 
 class OrderItemResponse(BaseModel):
