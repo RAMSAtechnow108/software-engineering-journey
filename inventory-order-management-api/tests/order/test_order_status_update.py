@@ -135,3 +135,21 @@ def test_delivered_order_cannot_transition(pending_order):
     db.refresh(order)
 
     assert order.status == OrderStatus.DELIVERED
+    
+    
+
+def test_complete_order_lifecycle(pending_order):
+    
+    db, service, order = pending_order
+
+    order = service.update_order_status(order_id=order.id,new_status=OrderStatus.CONFIRMED)
+
+    assert order.status == OrderStatus.CONFIRMED
+    
+    order = service.update_order_status(order_id=order.id, new_status=OrderStatus.SHIPPED)
+
+    assert order.status == OrderStatus.SHIPPED
+
+    order =service.update_order_status(order_id=order.id, new_status=OrderStatus.DELIVERED)
+
+    assert order.status == OrderStatus.DELIVERED
