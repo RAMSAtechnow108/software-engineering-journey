@@ -50,3 +50,9 @@ def create_order(customer_id:int, order_data: OrderCreate,service:OrderService=D
 @order_router.patch("/{order_id}/status", response_model=OrderResponse)
 def update_order_status(order_id:int, status_data: OrderStatusUpdate, service:OrderService=Depends(get_order_service)):
     return service.update_order_status(order_id=order_id, new_status=status_data.status)
+
+
+@order_router.patch("/{order_id}/cancel", response_model=OrderResponse)
+def cancel_order(order_id:int, service: OrderService=Depends(get_order_service)):
+    
+    return service.cancel_order(order_id)

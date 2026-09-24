@@ -5,6 +5,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from app.schemas.order_schema import OrderCreate
 from app.constants.order_constants import OrderStatus
 from app.domain.order_state.state_machine import OrderStateMachine
+from app.exceptions.order_exceptions import OrderNotFoundError
 
 from datetime import datetime, timedelta
 
@@ -171,4 +172,50 @@ class OrderService:
         except Exception:
             self.order_repository.db.rollback()
             logger.exception("Unexpected error while updating order status of order_id=%s", order_id)
+            raise
+        
+    
+    def cancel_order(self, order_id:int):
+        logger.info("Cancelling order, order_id=$s",order_id)
+
+        try:
+            order = self.order_repository.get_order_for_update(order_id)
+
+            if order is None:
+                raise OrderNotFoundError(order_id)
+            
+            
+            self.order_state_machine.validate_transition(order.status,OrderStatus.CANCELLED)
+            
+            logger.info("Order cancellation validated,order_id=%s",order_id)
+            
+            order_item = self.order_item_repository.get_order_items(order.id)
+
+            for item in order_item:
+                inventory = self.inventory_repository.get_inventory_for_update(item.product_id)
+
+                if inventory.reserved_quantity<item.quantity:
+                    raise ValueError(
+                        f"Insufficient reserved quantity "
+                        f"for product_id={item.product_id}"
+                    )
+                    
+                inventory.reserved_quantity -= item.quantity
+                
+            order.status = OrderStatus.CANCELLED
+            
+            self.order_repository.db.commit()
+             
+
+            return order
+
+        except SQLAlchemyError:
+            self.order_repository.db.rollback()
+            logger.exception("Database error while cancelling order, order_id=%s", order_id)
+            raise
+        
+        except Exception:
+            self.order_repository.db.rollback()
+            logger.exception("Error while cancelling order, order_id=%s", order_id)
+
             raise
