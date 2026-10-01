@@ -50,7 +50,7 @@ class CustomerRepository:
     
     def create_customer(self, customer_data: CustomerCreate):
 
-        logger.info("Creating customer with name=%s",customer_data.name)        
+        logger.info("Adding customer with name=%s",customer_data.name)        
         try: 
             
             logger.debug("Customer object created with name=%s, email=%s",customer_data.name, customer_data.email)
@@ -115,9 +115,56 @@ class CustomerRepository:
             self.db.rollback()
             logger.exception("Unexpected error while creating customer.")
             raise
-            
-            
-            
+                
+                
+        
+    def add_customer(
+        self,
+        customer_data: CustomerCreate
+    ) -> Customer:
+
+        logger.info("Adding customer to current transaction")
+
+        existing_email = self.db.execute(
+            select(Customer).where(
+                Customer.email == customer_data.email
+            )
+        ).scalar_one_or_none()
+
+        if existing_email:
+            raise DuplicateCustomerEmailError(
+                customer_data.email
+            )
+
+        existing_phone = self.db.execute(
+            select(Customer).where(
+                Customer.phone == customer_data.phone
+            )
+        ).scalar_one_or_none()
+
+        if existing_phone:
+            raise DuplicateCustomerPhoneError(
+                customer_data.phone
+            )
+
+        new_customer = Customer(
+            name=customer_data.name,
+            email=customer_data.email,
+            phone=customer_data.phone
+        )
+
+        self.db.add(new_customer)
+        self.db.flush()
+
+        logger.info(
+            "Customer added to transaction with customer_id=%s",
+            new_customer.id
+        )
+
+        return new_customer
+        
+
+
     def update_customer(self, customer_id:int, customer_data: CustomerUpdate):
         
         logger.info("Updating customer with customer_id=%s",customer_id)

@@ -32,3 +32,5 @@ class Customer(Base):
         UniqueConstraint("email", name = "uq_customers_email"),
         UniqueConstraint("phone", name = "uq_customers_phone"),
     )
+    
+    user = relationship("User", back_populates="customer")

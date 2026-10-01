@@ -29,6 +29,5 @@ TestSessionLocal = sessionmaker(
 )
 
 
-print(Base.metadata.tables.keys())
 
 Base.metadata.create_all(bind=test_engine)
