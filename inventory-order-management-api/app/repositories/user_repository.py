@@ -55,3 +55,12 @@ class UserRepository:
 
         return new_user
         
+    
+    
+    def get_user_by_id(self, user_id:int) ->User|None:
+        logger.info("Getting user be user_id=%s", user_id)
+
+        statement  = select(User).where(User.id == user_id)
+
+        result = self.db.execute(statement)
+        return result.scalar_one_or_none()
