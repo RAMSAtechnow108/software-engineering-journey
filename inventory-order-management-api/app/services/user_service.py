@@ -61,3 +61,7 @@ class UserService:
 
             raise
     
+    
+    def get_all_users(self):
+        logger.info("Fetching all users")
+        return self.user_repository.get_all_users()

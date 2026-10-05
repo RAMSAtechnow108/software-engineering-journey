@@ -8,7 +8,10 @@ from app.repositories.customer_repository import CustomerRepository
 
 from app.services.user_service import UserService
 
-from app.schemas.user_schema import UserCreate, UserRegistrationResponse
+from app.security.dependencies import require_admin
+from app.models.user import User
+
+from app.schemas.user_schema import UserCreate, UserRegistrationResponse, UserResponse
 
 user_router = APIRouter()
 
@@ -29,3 +32,8 @@ def register_customer(user_data:UserCreate, service:UserService = Depends(get_us
     user, customer = service.register_customer(user_data)
 
     return {"user": user, "customer":customer}
+
+
+@user_router.get("/", response_model=list[UserResponse])
+def get_all_users(current_user: User= Depends(require_admin), service: UserService = Depends(get_user_service)):
+    return service.get_all_users()
