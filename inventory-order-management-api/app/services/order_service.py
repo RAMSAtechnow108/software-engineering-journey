@@ -2,6 +2,9 @@ import logging
 from decimal import Decimal
 from sqlalchemy.exc import SQLAlchemyError
 
+from app.models.user import User
+from app.constants.user_constants import UserRole
+from fastapi import HTTPException
 from app.schemas.order_schema import OrderCreate
 from app.constants.order_constants import OrderStatus
 from app.domain.order_state.state_machine import OrderStateMachine
@@ -32,22 +35,39 @@ class OrderService:
         
         
     
-    def get_order_by_id(self, order_id:int):
+    def get_order_by_id(self, order_id:int, current_user:User):
         
         logger.info("Getting order witg order_id=%s",order_id)
 
         order = self.order_repository.get_order_by_id(order_id)
 
+        if order is None:
+            raise OrderNotFoundError(order_id)
+        
+        if current_user.role != UserRole.ADMIN:
+            if current_user.customer_id != order.customer_id:
+                raise HTTPException(
+                    status_code=403, 
+                    detail="You do not have access to this order"
+                )
+                
         logger.info("Order fetched successfully with order_id=%s",order_id)
 
         return order
     
 
     
-    def create_order(self, customer_id:int, order_data:OrderCreate):
+    def create_order(self, customer_id:int, order_data:OrderCreate,current_user:User):
         
         logger.info("Creating order for customer_id=%s",customer_id)
 
+        if current_user.role != UserRole.ADMIN:
+            if current_user.customer_id != customer_id:
+                raise HTTPException(
+                    status_code=403,
+                    detail="You do not have access to this customer"
+                )
+        
         try:
             
             self.customer_repository.get_customer_by_id(customer_id)
@@ -145,9 +165,15 @@ class OrderService:
             raise
 
 
-    def update_order_status(self, order_id:int, new_status:OrderStatus):
+    def update_order_status(self, order_id:int, new_status:OrderStatus, current_user: User):
         
         logger.info("Updating order status, order_id=%s, new_status=%s", order_id, new_status)
+        
+        if current_user.role!=UserRole.ADMIN:
+            raise HTTPException(
+                status_code=403,
+                detail="Only admin can update order status"
+            )
         
         try:
             
@@ -175,14 +201,24 @@ class OrderService:
             raise
         
     
-    def cancel_order(self, order_id:int):
-        logger.info("Cancelling order, order_id=$s",order_id)
+    def cancel_order(self, order_id:int, current_user:User):
+
+        logger.info("Cancelling order, order_id=%s",order_id)
+
+        
 
         try:
             order = self.order_repository.get_order_for_update(order_id)
 
             if order is None:
                 raise OrderNotFoundError(order_id)
+            
+            if current_user.role != UserRole.ADMIN:
+                if current_user.customer_id != order.customer_id:
+                    raise HTTPException(
+                        status_code=403,
+                        detail="You do not have access to cancel this order"
+                    )
             
             
             self.order_state_machine.validate_transition(order.status,OrderStatus.CANCELLED)

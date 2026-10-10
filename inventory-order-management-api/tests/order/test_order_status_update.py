@@ -1,3 +1,4 @@
+
 import uuid
 import pytest
 
@@ -12,10 +13,12 @@ from app.repositories.customer_repository import CustomerRepository
 from app.services.order_service import OrderService
 
 from app.models.customer import Customer
-from app.models.order import Order
-from app.models.order import OrderStatus
+from app.models.user import User, UserRole
+from app.models.order import Order, OrderStatus
 
-from app.exceptions.order_exceptions import InvalidOrderStatusTransitionError
+from app.exceptions.order_exceptions import (
+    InvalidOrderStatusTransitionError,
+)
 
 
 @pytest.fixture
@@ -30,7 +33,7 @@ def order_service():
         customer_repository=customer_repository,
         product_repository=None,
         inventory_repository=None,
-        order_item_repository=None
+        order_item_repository=None,
     )
 
     yield db, service
@@ -44,47 +47,65 @@ def pending_order(order_service):
 
     unique_id = uuid.uuid4().hex[:8]
 
+    # 1. Create customer first
     customer = Customer(
         name="Status Test Customer",
         email=f"pending_status_{unique_id}@example.com",
-        phone=f"98765{str(uuid.uuid4().int)[-5:]}"
+        phone=f"98765{str(uuid.uuid4().int)[-5:]}",
     )
 
     db.add(customer)
     db.flush()
 
+    # 2. Create admin user
+    admin = User(
+        email=f"admin_status_{unique_id}@example.com",
+        password_hash="test-password-hash",
+        role=UserRole.ADMIN,
+        is_active=True,
+        customer_id=None,
+    )
+
+    db.add(admin)
+    db.flush()
+
+    # 3. Create pending order
     order = Order(
         order_number=f"TEST-PENDING-STATUS-{unique_id}",
         customer_id=customer.id,
         status=OrderStatus.PENDING,
         total_amount=Decimal("100.00"),
-        reservation_until=datetime.now()
+        reservation_until=datetime.now(),
     )
 
     db.add(order)
     db.commit()
+    db.refresh(order)
+    db.refresh(admin)
 
-    return db, service, order
+    return db, service, order, admin
 
 
 def test_update_order_status_to_confirmed(pending_order):
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
     updated_order = service.update_order_status(
         order_id=order.id,
-        new_status=OrderStatus.CONFIRMED
+        new_status=OrderStatus.CONFIRMED,
+        current_user=admin,
     )
 
     assert updated_order.status == OrderStatus.CONFIRMED
 
 
 def test_invalid_order_status_transition(pending_order):
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
     with pytest.raises(InvalidOrderStatusTransitionError):
         service.update_order_status(
             order_id=order.id,
-            new_status=OrderStatus.SHIPPED
+            new_status=OrderStatus.SHIPPED,
+            current_user=admin,
         )
 
     db.refresh(order)
@@ -93,35 +114,37 @@ def test_invalid_order_status_transition(pending_order):
 
 
 def test_update_confirmed_order_to_shipped(pending_order):
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
     order.status = OrderStatus.CONFIRMED
     db.commit()
 
     updated_order = service.update_order_status(
         order_id=order.id,
-        new_status=OrderStatus.SHIPPED
+        new_status=OrderStatus.SHIPPED,
+        current_user=admin,
     )
 
     assert updated_order.status == OrderStatus.SHIPPED
 
 
 def test_update_shipped_order_to_delivered(pending_order):
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
     order.status = OrderStatus.SHIPPED
     db.commit()
 
     updated_order = service.update_order_status(
         order_id=order.id,
-        new_status=OrderStatus.DELIVERED
+        new_status=OrderStatus.DELIVERED,
+        current_user=admin,
     )
 
     assert updated_order.status == OrderStatus.DELIVERED
 
 
 def test_delivered_order_cannot_transition(pending_order):
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
     order.status = OrderStatus.DELIVERED
     db.commit()
@@ -129,27 +152,38 @@ def test_delivered_order_cannot_transition(pending_order):
     with pytest.raises(InvalidOrderStatusTransitionError):
         service.update_order_status(
             order_id=order.id,
-            new_status=OrderStatus.PENDING
+            new_status=OrderStatus.PENDING,
+            current_user=admin,
         )
 
     db.refresh(order)
 
     assert order.status == OrderStatus.DELIVERED
-    
-    
+
 
 def test_complete_order_lifecycle(pending_order):
-    
-    db, service, order = pending_order
+    db, service, order, admin = pending_order
 
-    order = service.update_order_status(order_id=order.id,new_status=OrderStatus.CONFIRMED)
+    order = service.update_order_status(
+        order_id=order.id,
+        new_status=OrderStatus.CONFIRMED,
+        current_user=admin,
+    )
 
     assert order.status == OrderStatus.CONFIRMED
-    
-    order = service.update_order_status(order_id=order.id, new_status=OrderStatus.SHIPPED)
+
+    order = service.update_order_status(
+        order_id=order.id,
+        new_status=OrderStatus.SHIPPED,
+        current_user=admin,
+    )
 
     assert order.status == OrderStatus.SHIPPED
 
-    order =service.update_order_status(order_id=order.id, new_status=OrderStatus.DELIVERED)
+    order = service.update_order_status(
+        order_id=order.id,
+        new_status=OrderStatus.DELIVERED,
+        current_user=admin,
+    )
 
     assert order.status == OrderStatus.DELIVERED

@@ -1,4 +1,9 @@
+
+import uuid
+
 from app.models.user import User
+from app.models.customer import Customer
+from app.security.password import hash_password
 
 
 def test_login_wrong_password(client):
@@ -6,8 +11,8 @@ def test_login_wrong_password(client):
         "/auth/login",
         json={
             "email": "testuser123@example.com",
-            "password": "WrongPassword123"
-        }
+            "password": "WrongPassword123",
+        },
     )
 
     assert response.status_code == 401
@@ -16,52 +21,66 @@ def test_login_wrong_password(client):
 
     assert data["error_code"] == "INVALID_CREDENTIALS"
     assert data["message"] == "Invalid email or password"
-    
+
 
 def test_login_unkwonn_email(client):
     response = client.post(
         "/auth/login",
         json={
-            "email":"doesnotexist@gmail.com",
-            "password" :"StrongPass123"
-        }
+            "email": f"unknown_{uuid.uuid4().hex}@example.com",
+            "password": "StrongPass123",
+        },
     )
-    
-    assert response.status_code==401
-    
+
+    assert response.status_code == 401
+
     data = response.json()
 
     assert data["error_code"] == "INVALID_CREDENTIALS"
     assert data["message"] == "Invalid email or password"
-    
-    
 
 
-def test_login_inactive_user(client,db):
-    
-    
-    user = (
-        db.query(User).filter(User.email == "Testuser123@example.com").first()
+def test_login_inactive_user(client, db):
+    unique_id = uuid.uuid4().hex
+    email = f"inactive_{unique_id}@example.com"
+    phone = f"9{uuid.uuid4().int % 1_000_000_000:09d}"
+    password = "StrongPass123"
+
+    # 1. Create the customer required by the User relationship.
+    customer = Customer(
+        name="Inactive Test Customer",
+        email=email,
+        phone=phone,
     )
 
+    db.add(customer)
+    db.flush()
 
-    assert user is not None
-    
-    user.is_active = False
-    
+    # 2. Create an inactive user with a valid password hash.
+    user = User(
+        email=email,
+        password_hash=hash_password(password),
+        is_active=False,
+        role="CUSTOMER",
+        customer_id=customer.id,
+    )
+
+    db.add(user)
     db.commit()
 
+    # 3. Attempt login using the same email and correct password.
     response = client.post(
         "/auth/login",
-        json = {
-            "email":"testuser123@gmail.com",
-            "password":"StrongPass123"
-        }
+        json={
+            "email": email,
+            "password": password,
+        },
     )
-    
+
     assert response.status_code == 401
+
     data = response.json()
 
     assert data["error_code"] == "INVALID_CREDENTIALS"
     assert data["message"] == "Invalid email or password"
-    
+
