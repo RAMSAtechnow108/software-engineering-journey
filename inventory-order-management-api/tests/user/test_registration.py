@@ -2,41 +2,44 @@ from app.models.customer import Customer
 from app.models.user import User
 from app.constants.user_constants import UserRole
 from app.security.password import verify_password
-
+import uuid
 
 
 def test_sucessful_customer_registration(client, db):
-    
+    email = f"test_user_{uuid.uuid4().hex[:8]}@example.com"
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    password = "StrongPass123"
     response = client.post(
         "/users/register",
         json={
             "name": "Test User",
-            "email": "testuser123@example.com",
-            "phone": "90000000003",
-            "password": "StrongPass123"
+            "email": email,
+            "phone": phone,
+            "password": password
         }        
     )
     
     assert response.status_code == 201
     
     data = response.json()
+    
 
     assert "user" in data
     assert "customer" in data
 
-    assert data["user"]["email"] == "testuser123@example.com"
+    assert data["user"]["email"] == email
     assert data["user"]["role"] == "customer"
     assert data["user"]["is_active"] is True
     
     assert data["customer"]["name"] == "Test User"
-    assert data["customer"]["email"] == "testuser123@example.com"
-    assert data["customer"]["phone"] == "90000000003"
+    assert data["customer"]["email"] == email
+    assert data["customer"]["phone"] == phone
     
     
-    user = (db.query(User).filter(User.email == "testuser123@example.com").first())
+    user = (db.query(User).filter(User.email == email).first())
     
     customer = (
-        db.query(Customer).filter(Customer.email == "testuser123@example.com").first()
+        db.query(Customer).filter(Customer.email == email).first()
     )
     
     assert user is not None
@@ -45,18 +48,21 @@ def test_sucessful_customer_registration(client, db):
     
     assert user.customer_id == customer.id
     
-    assert user.password_hash != "StrongPass123"
-    assert verify_password("StrongPass123",user.password_hash) is True
+    assert user.password_hash != password
+    assert verify_password(password,user.password_hash) is True
     
     assert user.role == UserRole.CUSTOMER
     assert user.is_active is True
     
 def test_duplicate_customer_email(client):
+    email = f"test_duplicate_user_{uuid.uuid4().hex[:8]}@example.com"
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    password = "StrongPass123"
     payload = {
         "name": "First User",
-        "email": "duplicate@example.com",
-        "phone": "9000000002",
-        "password": "StrongPass123"
+        "email": email,
+        "phone": phone,
+        "password": password
     }
 
     first_response = client.post(
@@ -65,11 +71,11 @@ def test_duplicate_customer_email(client):
     )
 
     assert first_response.status_code == 201
-
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
     second_payload = {
         "name": "Second User",
-        "email": "duplicate@example.com",
-        "phone": "9000000003",
+        "email": email,
+        "phone": phone,
         "password": "AnotherPass123"
     }
 
@@ -87,11 +93,14 @@ def test_duplicate_customer_email(client):
     
 
 def test_duplicate_customer_phone(client):
+    email = f"test_user_{uuid.uuid4().hex[:8]}@example.com"
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    password = "StrongPass123"
     payload = {
         "name": "Phone User",
-        "email": "phoneuser1@example.com",
-        "phone": "9000000010",
-        "password": "StrongPass123"
+        "email": email,
+        "phone": phone,
+        "password": phone
     }
 
     first_response = client.post(
@@ -122,6 +131,8 @@ def test_duplicate_customer_phone(client):
     
     
 def test_registration_invalid_email(client):
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    
     response = client.post(
         "/users/register",
         json={
@@ -134,6 +145,8 @@ def test_registration_invalid_email(client):
 
     assert response.status_code == 422
 def test_registration_short_password(client):
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    
     response = client.post(
         "/users/register",
         json={
@@ -146,6 +159,7 @@ def test_registration_short_password(client):
 
     assert response.status_code == 422
 def test_registration_short_name(client):
+    
     response = client.post(
         "/users/register",
         json={
@@ -161,13 +175,16 @@ def test_registration_short_name(client):
     
 
 def test_registration_cannot_assign_admin_role(client, db):
+    email = f"test_user_{uuid.uuid4().hex[:8]}@example.com"
+    phone = f"9{uuid.uuid4().int % 10**9:09d}"
+    password = "StrongPass123"
     response = client.post(
         "/users/register",
         json={
             "name": "Security Test",
-            "email": "security@example.com",
-            "phone": "9000000040",
-            "password": "StrongPass123",
+            "email": email,
+            "phone": phone,
+            "password": password,
             "role": "admin",
             "customer_id": 999
         }
@@ -177,18 +194,15 @@ def test_registration_cannot_assign_admin_role(client, db):
 
     data = response.json()
 
-    # Server must assign CUSTOMER role
-    assert data["user"]["role"] == "customer"
 
-    # User must be linked to the newly-created customer,
-    # not to the client-supplied customer_id
+    assert data["user"]["role"] == "customer"
     assert data["user"]["customer_id"] == data["customer"]["id"]
 
     assert data["user"]["customer_id"] != 999
 
     user = (
         db.query(User)
-        .filter(User.email == "security@example.com")
+        .filter(User.email == email)
         .first()
     )
 

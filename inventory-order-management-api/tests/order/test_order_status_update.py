@@ -9,6 +9,8 @@ from tests.database import TestSessionLocal
 
 from app.repositories.order_repository import OrderRepository
 from app.repositories.customer_repository import CustomerRepository
+from app.repositories.inventory_repository import InventoryRepository
+from app.repositories.order_item_repository import OrderItemRepository
 
 from app.services.order_service import OrderService
 
@@ -20,6 +22,9 @@ from app.exceptions.order_exceptions import (
     InvalidOrderStatusTransitionError,
 )
 
+from sqlalchemy.exc import SQLAlchemyError
+from app.exceptions.order_exceptions import OrderNotFoundError
+
 
 @pytest.fixture
 def order_service():
@@ -27,18 +32,21 @@ def order_service():
 
     order_repository = OrderRepository(db)
     customer_repository = CustomerRepository(db)
+    inventory_repository = InventoryRepository(db)
+    order_item_repository = OrderItemRepository(db)
 
     service = OrderService(
         order_repository=order_repository,
         customer_repository=customer_repository,
         product_repository=None,
-        inventory_repository=None,
-        order_item_repository=None,
+        inventory_repository=inventory_repository,
+        order_item_repository=order_item_repository,
     )
 
     yield db, service
 
     db.close()
+
 
 
 @pytest.fixture
@@ -187,3 +195,5 @@ def test_complete_order_lifecycle(pending_order):
     )
 
     assert order.status == OrderStatus.DELIVERED
+
+

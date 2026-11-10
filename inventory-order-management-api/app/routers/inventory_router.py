@@ -6,6 +6,7 @@ from app.schemas.inventory_schema import InventoryResponse,InventoryUpdate
 from app.services.inventory_service import InventoryService
 from app.repositories.inventory_repository import InventoryRepository
 
+from app.security.dependencies import require_admin
 
 
 
@@ -21,7 +22,7 @@ def get_inventory_service(db:Session =Depends(get_db)):
     return service
 
 
-@inventory_router.get("/{product_id}",response_model = InventoryResponse)
+@inventory_router.get("/{product_id}",dependencies=[Depends(require_admin)],response_model = InventoryResponse)
 def get_inventory_by_product_id(
     product_id:int, 
     service: InventoryService = Depends(get_inventory_service)
@@ -29,7 +30,7 @@ def get_inventory_by_product_id(
     
     return service.get_inventory_by_product_id(product_id)
 
-@inventory_router.patch("/{product_id}",response_model=InventoryResponse)
+@inventory_router.patch("/{product_id}",dependencies=[Depends(require_admin)],response_model=InventoryResponse)
 def update_inventory(product_id:int,inventory_data: InventoryUpdate,service:InventoryService=Depends(get_inventory_service)):
     
     return service.update_inventory(product_id, inventory_data)

@@ -53,9 +53,9 @@ class CategoryService:
 
     def create_category(self,category):
         logger.info("Creating category %s",category.name)
-        reslut = self.repository.create_category(category)
+        result = self.repository.create_category(category)
         logger.info("Category created successfully")
-        return reslut
+        return result
     
     def update_category(self,category_id,category):
         logger.info("Updating category id=%s",category_id)

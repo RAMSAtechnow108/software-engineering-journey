@@ -13,6 +13,8 @@ from app.schemas.category_schema import (
 )
 from fastapi import Query
 
+from app.security.dependencies import require_admin
+
 
 
 
@@ -46,19 +48,22 @@ def get_category_by_id(category_id:int, service:CategoryService = Depends(get_ca
     return service.get_category_by_id(category_id)
 
 
-@category_router.post("/",status_code=201,response_model = CategoryResponse)
-def create_category(category:CategoryCreate,service:CategoryService = Depends(get_category_service)):
+@category_router.post("/",status_code=201,dependencies=[Depends(require_admin)],response_model = CategoryResponse)
+def create_category(
+    category:CategoryCreate,
+    service:CategoryService = Depends(get_category_service)
+    ):
     
     return service.create_category(category)
 
 
-@category_router.patch("/{category_id}",response_model = CategoryResponse)
+@category_router.patch("/{category_id}",dependencies=[Depends(require_admin)],response_model = CategoryResponse)
 def update_category(category_id:int, category:CategoryUpdate, service:CategoryService = Depends(get_category_service)):
     
     return service.update_category(category_id, category)
 
 
-@category_router.delete("/{category_id}")
+@category_router.delete("/{category_id}",dependencies=[Depends(require_admin)])
 def delete_category(category_id:int,service: CategoryService=Depends(get_category_service)):
     
     service.delete_category(category_id)

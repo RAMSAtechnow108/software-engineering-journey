@@ -269,8 +269,13 @@ def test_expired_order_rollback():
         inventory_a_id = inventory_a.id
         inventory_b_id = inventory_b.id
 
-        with pytest.raises(ValueError):
-            service.expire_orders(current_time)
+        
+        result = service.expire_orders(current_time)
+        failed_order_ids = {
+            order_id for order_id, error in result["failed_orders"]
+        }
+        assert order_id in failed_order_ids
+
 
         db.expire_all()
 

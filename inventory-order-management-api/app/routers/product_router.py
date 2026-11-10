@@ -1,11 +1,10 @@
-from fastapi import APIRouter
-from fastapi import Depends
+from fastapi import APIRouter,Depends, Query
+from sqlalchemy.orm import Session
 from app.repositories.product_repository import ProductRepository
 from app.services.product_service import ProductService
 from app.schemas.product_schema import ProductCreate, ProductResponse,ProductUpdate
-from sqlalchemy.orm import Session
 from app.core.database import get_db
-from fastapi import Query
+from app.security.dependencies import require_admin
 
 
 
@@ -45,19 +44,19 @@ def get_product(product_id:int ,service:ProductService = Depends(get_product_ser
 
 
 
-@product_router.post("/",status_code=201, response_model=ProductResponse)
+@product_router.post("/",status_code=201, dependencies=[Depends(require_admin)], response_model=ProductResponse)
 def create_product(product: ProductCreate, service:ProductService = Depends(get_product_service)):
     return service.create_product(product)
 
 
-@product_router.patch("/{product_id}",response_model = ProductResponse)
+@product_router.patch("/{product_id}" ,response_model = ProductResponse, dependencies=[Depends(require_admin)])
 def update_product(product_id: int, product: ProductUpdate,service:ProductService = Depends(get_product_service)):
     
     
     return service.update_product(product_id,product)
     
 
-@product_router.delete("/{product_id}")
+@product_router.delete("/{product_id}",dependencies=[Depends(require_admin)])
 def delete_product(product_id: int, service:ProductService = Depends(get_product_service)):
     service.delete_product(product_id)
     return { 
